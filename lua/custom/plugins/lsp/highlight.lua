@@ -1,6 +1,6 @@
 local M = {}
 
-local U = require("mvim.utils")
+local U = require("custom.utils")
 
 local function highlight_references()
   local status_ok, ts_utils = pcall(function()

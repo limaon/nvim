@@ -1,6 +1,6 @@
 local M = {}
 
-local U = require("mvim.utils")
+local U = require("custom.utils")
 
 function M.on_attach(client, buffer)
   if client.server_capabilities[U.lsp_providers.FORMATTING] then

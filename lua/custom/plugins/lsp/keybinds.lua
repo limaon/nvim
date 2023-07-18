@@ -1,6 +1,6 @@
 local M = {}
 
-local providers = require("mvim.utils").lsp_providers
+local providers = require("custom.utils").lsp_providers
 
 M._keys = nil
 

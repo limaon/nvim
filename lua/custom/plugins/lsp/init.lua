@@ -19,7 +19,7 @@ local M = {
       {
         "hrsh7th/cmp-nvim-lsp",
         cond = function()
-          return require("mvim.utils").has("nvim-cmp")
+          return require("custom.utils").has("nvim-cmp")
         end,
       },
       {
@@ -29,11 +29,11 @@ local M = {
           ui = {
             width = 0.8,
             height = 0.8,
-            border = mo.styles.border,
+            border = moduleObject.styles.border,
             icons = {
-              package_installed = mo.styles.icons.plugin.installed,
-              package_pending = mo.styles.icons.plugin.pedding,
-              package_uninstalled = mo.styles.icons.plugin.uninstalled,
+              package_installed = moduleObject.styles.icons.plugin.installed,
+              package_pending = moduleObject.styles.icons.plugin.pedding,
+              package_uninstalled = moduleObject.styles.icons.plugin.uninstalled,
             },
             keymaps = { apply_language_filter = "f" },
           },
@@ -43,11 +43,10 @@ local M = {
     opts = {
       servers = {
         bashls = {},
-        dockerls = {},
         cssls = {},
         eslint = {
           on_attach = function()
-            require("mvim.utils").augroup("AutoFixOnSave", {
+            require("custom.utils").augroup("AutoFixOnSave", {
               event = "BufWritePre",
               pattern = { "*.ts", "*.tsx", "*.js", "*.jsx", "*.vue" },
               command = function(args)
@@ -66,6 +65,7 @@ local M = {
             })
           end,
         },
+        --[[ 
         gopls = {
           settings = {
             gopls = {
@@ -93,7 +93,7 @@ local M = {
               directoryFilters = { "-node_modules" },
             },
           },
-        },
+        },--]]
         jsonls = {
           on_new_config = function(new_config)
             local schemas = require("schemastore").json.schemas()
@@ -120,13 +120,12 @@ local M = {
         lua_ls = {
           settings = {
             Lua = {
-              format = { enable = false },
+              format = { enable = true },
               telemetry = { enable = false },
               workspace = { checkThirdParty = false },
             },
           },
         },
-        vimls = {},
         volar = {
           -- take over Typescript
           filetypes = {
@@ -137,6 +136,7 @@ local M = {
             "typescriptreact",
           },
         },
+        --[[ 
         yamlls = {
           settings = {
             yaml = {
@@ -144,11 +144,11 @@ local M = {
               format = { enable = true },
             },
           },
-        },
+        },--]]
       },
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
-      ---@type table<string, fun(server:string, opts: table):boolean?>
+      -- @type table<string, fun(server:string, opts: table):boolean?>
       setup = {
         -- example to setup with typescript.nvim
         -- tsserver = function(_, opts)
@@ -160,21 +160,21 @@ local M = {
       },
     },
     config = function(_, opts)
-      require("mvim.plugins.lsp.diagnostics").setup()
+      require("custom.plugins.lsp.diagnostics").setup()
 
-      require("mvim.plugins.lsp.handlers").setup()
+      require("custom.plugins.lsp.handlers").setup()
 
-      require("mvim.utils").on_attach(function(client, buffer)
-        require("mvim.plugins.lsp.format").on_attach(client, buffer)
-        require("mvim.plugins.lsp.keybinds").on_attach(client, buffer)
+      require("custom.utils").on_attach(function(client, buffer)
+        require("custom.plugins.lsp.format").on_attach(client, buffer)
+        require("custom.plugins.lsp.keybinds").on_attach(client, buffer)
 
-        require("mvim.plugins.lsp.codelens").on_attach(client, buffer)
-        require("mvim.plugins.lsp.highlight").on_attach(client, buffer)
+        require("custom.plugins.lsp.codelens").on_attach(client, buffer)
+        require("custom.plugins.lsp.highlight").on_attach(client, buffer)
       end)
 
-      ---@param server string lsp server name
+      -- @param server string lsp server name
       local function setup_server(server)
-        local config = require("mvim.utils").resolve_config(server, opts.servers[server] or {})
+        local config = require("custom.utils").resolve_config(server, opts.servers[server] or {})
         if opts.setup[server] then
           if opts.setup[server](server, config) then
             return
@@ -191,7 +191,7 @@ local M = {
       local all_mlsp_servers =
         vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
 
-      local ensure_installed = {} ---@type string[]
+      local ensure_installed = {} -- @type string[]
       for server, server_opts in pairs(opts.servers) do
         if server_opts then
           server_opts = server_opts == true and {} or server_opts
@@ -214,10 +214,11 @@ local M = {
     opts = {
       bind = true,
       hint_scheme = "Comment",
-      handler_opts = { border = mo.styles.border },
+      handler_opts = { border = moduleObject.styles.border },
     },
   },
 
+  --[[ 
   {
     "jose-elias-alvarez/null-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
@@ -225,7 +226,7 @@ local M = {
       local nls = require("null-ls")
 
       return {
-        border = mo.styles.border,
+        border = moduleObject.styles.border,
         sources = {
           -- lua
           nls.builtins.formatting.stylua.with({
@@ -249,6 +250,7 @@ local M = {
       }
     end,
   },
+  --]]
 }
 
 return M

@@ -1,26 +1,33 @@
 local o, opt = vim.o, vim.opt
-local icons = mo.styles.icons
-local settings = mo.settings
+local icons = moduleObject.styles.icons
+local settings = moduleObject.settings
 
 -- Indentation
 o.wrap = false
 
 o.expandtab = true
-o.shiftwidth = 2
 o.shiftround = true
+o.expandtab = true
+o.smarttab = true
+o.smartindent = true
+o.autoindent = true
+o.softtabstop = 4
+o.shiftwidth = 2
+o.breakindent = true
 
--- line
+-- Line
 o.number = true
 o.relativenumber = true
+-- o.numberwidth = 2
 
 o.cursorline = true
-o.cursorlineopt = mo.styles.transparent and "number" or "number,line"
+o.cursorlineopt = moduleObject.styles.transparent and "number" or "number,line"
 
 -- fold
-o.foldlevel = 99
-o.foldcolumn = "auto"
-o.foldmethod = "expr"
-o.foldexpr = "nvim_treesitter#foldexpr()"
+-- o.foldlevel = 99
+-- o.foldcolumn = "auto"
+-- o.foldmethod = "expr"
+-- o.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- display
 o.signcolumn = "yes"
@@ -32,9 +39,9 @@ opt.clipboard = "unnamedplus"
 
 o.termguicolors = true
 
-o.laststatus = 0
+o.laststatus = 2
 
-o.scrolloff = 7
+o.scrolloff = 10
 o.sidescrolloff = 5
 
 o.pumheight = 12
@@ -42,6 +49,16 @@ o.pumheight = 12
 o.completeopt = "menu,menuone,noselect"
 
 o.confirm = true
+
+o.history = 10
+
+o.autochdir = true
+
+o.colorcolumn = "80"
+
+o.statusline = "%<%f %h%m%r%= %y (" .. vim.o.encoding .. ") L:%l/%L C:%c "
+
+-- o.guicursor = ''
 
 opt.fillchars = {
   eob = " ",
@@ -61,16 +78,19 @@ o.cmdheight = 1
 
 o.wildoptions = "pum"
 o.wildignorecase = true
-o.wildmode = "list:full"
+o.wildmode = "list:longest,list:full"
+o.wildignore = "*.o,*.obj,*.pyc,*.class,**/node_modules/*,**/.git/*"
 
--- match and search
+-- Match and search
+o.hlsearch = false
 o.incsearch = true
 o.smartcase = true
 o.ignorecase = true
+o.inccommand = 'split'
 
 -- Timings
-o.timeoutlen = 500
-o.updatetime = 500
+o.timeoutlen = 500 -- 300
+o.updatetime = 500 -- 250
 
 -- Window splitting
 o.splitright = true
@@ -84,7 +104,7 @@ o.undofile = true
 o.undodir = settings.undodir
 
 o.backup = true
-o.backupdir = mo.settings.backupdir
+o.backupdir = moduleObject.settings.backupdir
 
 -- Message output on vim actions
 opt.shortmess = {
@@ -101,3 +121,14 @@ opt.shortmess = {
 
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+
+
+-- Options for Netrw native file browser
+vim.g.netrw_fastbrowse = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_list_hide = '\\(\\^\\|\\s\\s\\)\\zs\\.\\S+\\,\\(\\^\\|\\s\\s\\)ntuser\\.\\S+'
+vim.g.netrw_liststyle = 0
+vim.g.netrw_winsize = 20
+vim.g.netrw_hide = 0
+vim.g.netrw_localmovecmd = 'mv -f'
+vim.g.netrw_localrmdir = 'rm -r'

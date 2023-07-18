@@ -39,8 +39,8 @@ local M = {
 
         -- Typing = when () -> () => |
         Rule("%(.*%)%s*%=$", "> {}", { "typescript", "typescriptreact", "javascript", "vue" })
-          :use_regex(true)
-          :set_end_pair_length(1),
+            :use_regex(true)
+            :set_end_pair_length(1),
       })
     end,
   },
@@ -66,6 +66,7 @@ local M = {
     },
   },
 
+  --[[
   {
     "andymass/vim-matchup",
     event = "BufReadPost",
@@ -80,7 +81,7 @@ local M = {
         fullwidth = true,
       }
     end,
-  },
+  },--]]
 }
 
 return M

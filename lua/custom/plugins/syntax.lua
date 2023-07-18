@@ -15,28 +15,12 @@ local M = {
     },
     opts = {
       ensure_installed = {
-        "bash",
-        "css",
-        "dockerfile",
-        "dot",
-        "gitignore",
-        "go",
-        "gomod",
-        "gowork",
-        "gosum",
-        "html",
-        "javascript",
-        "json",
-        "lua",
-        "markdown",
-        "python",
-        "scss",
-        "toml",
-        "tsx",
-        "typescript",
-        "vim",
-        "vue",
-        "yaml",
+        "bash", "css", "dockerfile",
+        "gitignore", "html", "javascript",
+        "json", "lua", "markdown",
+        "python", "scss", "toml",
+        "tsx", "typescript", "vim",
+        "vue", "yaml",
       },
       highlight = { enable = true },
       indent = { enable = true },
@@ -81,6 +65,7 @@ local M = {
   },
 
   -- surround
+  --[[
   {
     "kylechui/nvim-surround",
     keys = {
@@ -92,6 +77,7 @@ local M = {
       move_cursor = false,
     },
   },
+  --]]
 }
 
 return M

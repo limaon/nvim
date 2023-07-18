@@ -19,7 +19,7 @@ local M = {
       group = "",
     },
     window = {
-      border = mo.styles.border,
+      border = moduleObject.styles.border,
     },
     layout = {
       spacing = 5,

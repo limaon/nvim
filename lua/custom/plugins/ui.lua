@@ -1,4 +1,5 @@
 local M = {
+--[[
   {
     "akinsho/bufferline.nvim",
     event = "BufReadPre",
@@ -40,28 +41,28 @@ local M = {
             {
               filetype = "neo-tree",
               text = "Explorer",
-              separator = mo.styles.transparent,
+              separator = moduleObject.styles.transparent,
               text_align = "center",
               highlight = "PanelHeading",
             },
             {
               filetype = "undotree",
               text = "Undotree",
-              separator = mo.styles.transparent,
+              separator = moduleObject.styles.transparent,
               text_align = "center",
               highlight = "PanelHeading",
             },
             {
               filetype = "dapui_scopes",
               text = "Debugger",
-              separator = mo.styles.transparent,
+              separator = moduleObject.styles.transparent,
               text_align = "center",
               highlight = "PanelHeading",
             },
           },
           move_wraps_at_ends = true,
           show_close_icon = false,
-          separator_style = mo.styles.transparent and "thin" or "slope",
+          separator_style = moduleObject.styles.transparent and "thin" or "slope",
           show_buffer_close_icons = false,
           sort_by = "insert_after_current",
         },
@@ -87,8 +88,10 @@ local M = {
       }
     end,
   },
+  --]]
 
   -- lualine
+  --[[
   {
     "nvim-lualine/lualine.nvim",
     -- event = "VeryLazy",
@@ -207,7 +210,7 @@ local M = {
               end
             end
 
-            local U = require("mvim.utils")
+            local U = require("custom.utils")
             local formatters = U.list_registered_formatters(buf_ft)
             vim.list_extend(buf_client_names, formatters, 1, #formatters)
 
@@ -301,21 +304,10 @@ local M = {
           section_separators = "",
           disabled_filetypes = {
             statusline = {
-              "qf",
-              "lazy",
-              "help",
-              "diff",
-              "alpha",
-              "mason",
-              "undotree",
-              "toggleterm",
-              "neo-tree",
-              "dap-repl",
-              "dapui_stacks",
-              "dapui_scopes",
-              "dapui_watches",
-              "dapui_breakpoints",
-              "TelescopePrompt",
+              "qf", "lazy", "help", "diff",
+              "alpha", "mason", "undotree", "toggleterm",
+              "neo-tree", "dap-repl", "dapui_stacks", "dapui_scopes",
+              "dapui_watches", "dapui_breakpoints", "TelescopePrompt",
             },
           },
         },
@@ -343,7 +335,7 @@ local M = {
         },
       })
     end,
-  },
+  },--]]
 
   {
     "luukvbaal/statuscol.nvim",

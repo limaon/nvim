@@ -1,18 +1,18 @@
-local U = require("mvim.utils")
+local U = require("custom.utils")
 
 local M = {
   "nvim-telescope/telescope.nvim",
   cmd = "Telescope",
   keys = {
-    { "<leader>ff", "<Cmd>Telescope find_files<CR>", desc = "Find files" },
-    { "<leader>fw", "<Cmd>Telescope grep_string<CR>", desc = "Find word" },
-    { "<leader>fr", "<Cmd>Telescope oldfiles<CR>", desc = "Recent files" },
+    { "<leader>ff", "<Cmd>Telescope find_files<CR>",                desc = "Find files" },
+    { "<leader>fw", "<Cmd>Telescope grep_string<CR>",               desc = "Find word" },
+    { "<leader>fr", "<Cmd>Telescope oldfiles<CR>",                  desc = "Recent files" },
     { "<leader>fc", "<Cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Fuzzy search" },
-    { "<leader>fb", "<Cmd>Telescope buffers<CR>", desc = "List buffers" },
-    { "<leader>fd", "<Cmd>Telescope diagnostics<CR>", desc = "List diagnostics" },
-    { "<leader>fs", U.lsp_symbols("document"), desc = "Goto symbol" },
-    { "<leader>fS", U.lsp_symbols("workspace"), desc = "Goto symbol (Workspace)" },
-    { "<leader>fR", "<Cmd>Telescope resume<CR>", desc = "Resume" },
+    { "<leader>fb", "<Cmd>Telescope buffers<CR>",                   desc = "List buffers" },
+    { "<leader>fd", "<Cmd>Telescope diagnostics<CR>",               desc = "List diagnostics" },
+    { "<leader>fs", U.lsp_symbols("document"),                      desc = "Goto symbol" },
+    { "<leader>fS", U.lsp_symbols("workspace"),                     desc = "Goto symbol (Workspace)" },
+    { "<leader>fR", "<Cmd>Telescope resume<CR>",                    desc = "Resume" },
   },
   opts = function()
     local actions = require("telescope.actions")
@@ -20,25 +20,15 @@ local M = {
 
     return {
       defaults = {
+        preview = false,
         prompt_prefix = I.misc.telescope .. " ",
         selection_caret = I.misc.fish .. " ",
         file_ignore_patterns = {
-          "%.jpg",
-          "%.jpeg",
-          "%.png",
-          "%.otf",
-          "%.ttf",
-          ".git/",
-          "dist/",
-          "node_modules/",
-          "site-packages/",
-          "__pycache__/",
-          "migrations/",
-          ".mypy_cache/",
-          "package-lock.json",
-          "yarn.lock",
-          "pnpm-lock.yaml",
-          ".DS_Store",
+          "%.jpg", "%.jpeg", "%.png", "%.otf",
+          "%.ttf", ".git/", "dist/", "node_modules/",
+          "site-packages/", "__pycache__/", "migrations/",
+          ".mypy_cache/", "package-lock.json", "yarn.lock",
+          "pnpm-lock.yaml", ".DS_Store",
         },
         layout_config = {
           height = 0.9,
@@ -71,12 +61,9 @@ local M = {
       },
       pickers = {
         find_files = {
-          find_command = { "fd" },
           hidden = true,
         },
         buffers = {
-          theme = "dropdown",
-          previewer = false,
           sort_mru = true,
           sort_lastused = true,
           ignore_current_buffer = true,

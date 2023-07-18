@@ -1,4 +1,4 @@
-local U = require("mvim.utils")
+local U = require("custom.utils")
 
 -- U.augroup("AutoCursorLine", {
 --   event = { "InsertLeave", "WinEnter" },

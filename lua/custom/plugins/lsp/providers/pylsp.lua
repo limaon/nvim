@@ -1,4 +1,4 @@
----@return string? python path
+-- @return string? python path
 local function get_python()
   if vim.env.VIRTUAL_ENV then
     return require("lspconfig.util").path.join(vim.env.VIRTUAL_ENV, "bin", "python")

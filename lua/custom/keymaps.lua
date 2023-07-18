@@ -8,26 +8,23 @@ local function keymap(mode, lhs, rhs, opts)
   end
 end
 
--- editing: save
-keymap("n", "<leader>w", "<Cmd>w<CR>", { desc = "Save file" })
-keymap("n", "<leader>W", "<Cmd>wa<CR>", { desc = "Save files" })
 
--- editing: quit
-keymap("n", "<leader>q", "<Cmd>q<CR>", { desc = "Quit" })
-keymap("n", "<leader>Q", "<Cmd>q!<CR>", { desc = "Force quit" })
+-- Select all
+keymap('n', '<M-a>', 'gg<S-v>G', { desc = "Select all" })
 
--- copy/paste
--- keymap("n", "<leader>p", '"+p', { desc = "Paste clipboard text" })
--- keymap("v", "<leader>y", '"+y', { desc = "Copy to clipboard" })
+-- Native tabs
+keymap('n', 'te', ':tabedit ', { silent = false })
+keymap('n', 'tt', '<Cmd>tabnew<CR>', { silent = true })
+keymap('n', 'tn', '<Cmd>tabNext<CR>', { silent = true })
+keymap('n', 'tp', '<Cmd>tabprevious<CR>', { silent = true })
+keymap('n', 'td', '<Cmd>tabclose<CR>', { silent = true })
 
--- motion
-keymap("n", "<leader>;", "%", { desc = "Jump to match item" })
+-- Buffer moves
+keymap('n', '<Tab>', '<Cmd>bnext<CR>', { desc = "Next buffer" })
+keymap('n', '<S-Tab>', '<Cmd>bprevious<CR>', { desc = "Preivous buffer" })
+keymap('n', '<DELETE>', '<Cmd>bdelete!<CR>', { desc = "Close current" })
 
--- motion
-keymap({ "n", "v" }, "H", "^", { desc = "To the first non-blank char of the line" })
-keymap({ "n", "v" }, "L", "$", { desc = "To the end of the line" })
-
--- move line
+-- Move line
 keymap("n", "<M-k>", "<Cmd>move .-2<CR>==", { desc = "Move up" })
 keymap("n", "<M-j>", "<Cmd>move .+1<CR>==", { desc = "Move down" })
 keymap("i", "<M-k>", "<Esc><Cmd>move .-2<CR>==gi", { desc = "Move up" })
@@ -35,17 +32,17 @@ keymap("i", "<M-j>", "<Esc><Cmd>move .+1<CR>==gi", { desc = "Move down" })
 keymap("v", "<M-k>", ":move '<-2<cr>gv=gv", { desc = "Move up" })
 keymap("v", "<M-j>", ":move '>+1<cr>gv=gv", { desc = "Move down" })
 
--- split window
-keymap("n", "<leader>-", "<C-W>s", { desc = "Split below" })
-keymap("n", "<leader>|", "<C-W>v", { desc = "Split right" })
+-- Split window
+keymap("n", "ss", "<C-W>s", { desc = "Split below" })
+keymap("n", "sv", "<C-W>v", { desc = "Split right" })
 
 -- Move to window
-keymap("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
-keymap("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
-keymap("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
-keymap("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
+keymap("n", "sh", "<C-w>h", { desc = "Go to left window" })
+keymap("n", "sk", "<C-w>k", { desc = "Go to upper window" })
+keymap("n", "sj", "<C-w>j", { desc = "Go to lower window" })
+keymap("n", "sl", "<C-w>l", { desc = "Go to right window" })
 
--- resize window
+-- Resize window
 keymap("n", "<Up>", "<Cmd>resize +2<CR>", { desc = "Increase window height" })
 keymap("n", "<Down>", "<Cmd>resize -2<CR>", { desc = "Decrease window height" })
 keymap("n", "<Left>", "<Cmd>vertical resize -2<CR>", { desc = "Increase window width" })
@@ -65,11 +62,12 @@ keymap("v", "<", "<gv", { desc = "Visual shifting" })
 -- Clear search with <esc>
 keymap({ "i", "n" }, "<esc>", "<Cmd>nohlsearch<CR><Esc>", { desc = "Escape and clear hlsearch" })
 
--- better up/down
+-- Better up/down
 keymap({ "n", "v" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Move cursor up" })
 keymap({ "n", "v" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Move cursor down" })
 
-keymap("i", "jj", [[col('.') == 1 ? '<Esc>' : '<Esc>l']], { expr = true })
+-- Open File browser
+keymap("n", "<leader>e", "<Cmd>Explore<CR>", { desc = "Open Netrw" })
 
--- windows
-keymap("n", "<leader>bd", "<Cmd>bdelete!<CR>", { desc = "Close current" })
+-- Undotree
+keymap('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = "Open undotree for git" })

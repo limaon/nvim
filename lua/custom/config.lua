@@ -1,4 +1,4 @@
-require("mvim.styles")
+require("custom.styles")
 
 local M = {}
 
@@ -22,12 +22,12 @@ function M.bootstrap()
   vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
   require("lazy").setup({
-    spec = "mvim.plugins",
+    spec = "custom.plugins",
     defaults = { lazy = true },
     install = { colorscheme = { "catppuccin" } },
     change_detection = { notify = false },
     ui = {
-      border = mo.styles.border,
+      border = moduleObject.styles.border,
       icons = {
         loaded = I.plugin.installed,
         not_loaded = I.plugin.uninstalled,
@@ -57,7 +57,6 @@ function M.bootstrap()
           "gzip",
           "matchit",
           "matchparen",
-          "netrwPlugin",
           "tarPlugin",
           "tohtml",
           "tutor",
@@ -86,7 +85,7 @@ function M.load(name)
     })
   end
 
-  _load("mvim." .. name)
+  _load("custom." .. name)
 
   if vim.bo.filetype == "lazy" then
     vim.cmd([[do VimResized]])
@@ -99,19 +98,19 @@ function M.init()
     M.did_init = true
 
     -- M.load("options")
-    require("mvim.config").load("options")
+    require("custom.config").load("options")
   end
 end
 
 function M.setup()
-  _G.I = mo.styles.icons
+  _G.I = moduleObject.styles.icons
 
   -- bootstrap lazy.nvim
   M.bootstrap()
 
   -- setup keymaps & autocmds
   if vim.fn.argc(-1) == 0 then
-    require("mvim.utils").augroup("MVim", {
+    require("custom.utils").augroup("MVim", {
       event = "User",
       pattern = "VeryLazy",
       command = function()

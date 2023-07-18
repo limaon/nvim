@@ -1,5 +1,6 @@
 -- stop: shift + F5; restart: command + shift + F5
 local M = {
+  --[[
   "mfussenegger/nvim-dap",
   keys = {
     {
@@ -98,7 +99,7 @@ local M = {
           icons = I.dap.controls,
         },
         floating = {
-          border = mo.styles.border,
+          border = moduleObject.styles.border,
         },
       },
     },
@@ -129,7 +130,7 @@ local M = {
 
     -- load launch.json file
     require("dap.ext.vscode").load_launchjs(
-      vim.fn.getcwd() .. "/" .. mo.settings.metadir .. "/launch.json"
+      vim.fn.getcwd() .. "/" .. namespace.settings.metadir .. "/launch.json"
     )
 
     -- setup adapter
@@ -155,7 +156,7 @@ local M = {
     }
 
     -- https://github.com/rcarriga/nvim-dap-ui/issues/248
-    require("mvim.utils").augroup("DapReplOptions", {
+    require("custom.utils").augroup("DapReplOptions", {
       event = "BufWinEnter",
       pattern = { "\\[dap-repl\\]", "DAP *" },
       command = vim.schedule_wrap(function(args)
@@ -165,6 +166,7 @@ local M = {
       end),
     })
   end,
+--]]
 }
 
 return M

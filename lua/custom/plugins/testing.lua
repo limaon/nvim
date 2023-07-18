@@ -1,4 +1,5 @@
 return {
+  --[[ 
   {
     "nvim-neotest/neotest",
     keys = {
@@ -77,7 +78,7 @@ return {
           open_on_run = true,
         },
         floating = {
-          border = mo.styles.border,
+          border = moduleObject.styles.border,
           max_height = 0.6,
           max_width = 0.8,
         },
@@ -111,4 +112,5 @@ return {
       })
     end,
   },
+--]]
 }

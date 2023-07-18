@@ -1,21 +1,9 @@
----------------------------------------------------------------------
---                                                                 --
---   ,--.   ,--.         ,--.                  ,--.   ,--.         --
---   |   `.'   |,--. ,--.|  | ,---.  ,---.     |   `.'   | ,---.   --
---   |  |'.'|  | \  '  / |  || .-. :(  .-'     |  |'.'|  || .-. |  --
---   |  |   |  |  \   '  |  |\   --..-'  `)    |  |   |  |' '-' '  --
---   `--'   `--'.-'  /   `--' `----'`----'     `--'   `--' `---'   --
---              `---'                                              --
---                                                                 --
---              https://github.com/emxxjnm/nvim                    --
----------------------------------------------------------------------
-
 local g, fn = vim.g, vim.fn
 
 g.mapleader = " "
 g.maplocalleader = " "
 
-local namespace = {
+local defaultNamespace = {
   styles = {},
   settings = {
     metadir = ".vim",
@@ -25,6 +13,6 @@ local namespace = {
   },
 }
 
-_G.mo = mo or namespace
+_G.moduleObject = moduleObject or defaultNamespace
 
-require("mvim.config").setup()
+require("custom.config").setup()
