@@ -112,6 +112,7 @@ moduleObject.styles = {
       task = "",
       markdown = "",
       clock = "",
+      option = "󰘵",
       progress = {
         "██",
         "▇▇",
