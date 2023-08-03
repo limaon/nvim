@@ -6,8 +6,8 @@ local M = {
       {
         "neovim/nvim-lspconfig",
         keys = {
-          { "<leader>ll", "<CMD>LspLog<CR>",     desc = "Lsp Log" },
-          { "<leader>li", "<CMD>LspInfo<CR>",    desc = "Lsp Info" },
+          { "<leader>ll", "<CMD>LspLog<CR>", desc = "Lsp Log" },
+          { "<leader>li", "<CMD>LspInfo<CR>", desc = "Lsp Info" },
           { "<leader>lr", "<CMD>LspRestart<CR>", desc = "Lsp Restart" },
         },
       },
@@ -51,9 +51,9 @@ local M = {
               event = "BufWritePre",
               pattern = { "*.ts", "*.tsx", "*.js", "*.jsx", "*.vue" },
               command = function(args)
-                if require("mvim.plugins.lsp.format").enabled() then
+                if require("custom.plugins.lsp.format").enabled() then
                   local client =
-                      vim.lsp.get_active_clients({ bufnr = args.buf, name = "eslint" })[1]
+                    vim.lsp.get_active_clients({ bufnr = args.buf, name = "eslint" })[1]
                   if client then
                     local diag = vim.diagnostic.get(
                       args.buf,
@@ -69,7 +69,6 @@ local M = {
             })
           end,
         },
-        --[[
         gopls = {
           settings = {
             gopls = {
@@ -97,12 +96,11 @@ local M = {
               directoryFilters = { "-node_modules" },
             },
           },
-        },--]]
+        },
         jsonls = {
           on_new_config = function(new_config)
-            local schemas = require("schemastore").json.schemas()
             new_config.settings.json.schemas = new_config.settings.json.schemas or {}
-            vim.list_extend(new_config.settings.json.schemas, schemas, 1, #schemas)
+            vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
           end,
           settings = {
             json = {
@@ -117,15 +115,14 @@ local M = {
           settings = {
             stylelintplus = {
               autoFixOnSave = true,
-              autoFixOnformat = true,
+              autoFixOnFormat = true,
             },
           },
         },
         lua_ls = {
           settings = {
             Lua = {
-              diagnostics = { globals = { 'vim' } },
-              format = { enable = true },
+              format = { enable = false },
               telemetry = { enable = false },
               workspace = { checkThirdParty = false },
             },
@@ -141,19 +138,29 @@ local M = {
             "typescriptreact",
           },
         },
-        --[[
         yamlls = {
+          on_new_config = function(new_config)
+            new_config.settings.yaml.schemas = new_config.settings.yaml.schemas or {}
+            vim.list_extend(new_config.settings.yaml.schemas, require("schemastore").yaml.schemas())
+          end,
           settings = {
             yaml = {
               validate = true,
               format = { enable = true },
+              schemaStore = {
+                -- Must disable built-in schemaStore support to use
+                -- schemas from SchemaStore.nvim plugin
+                enable = false,
+                -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                url = "",
+              },
             },
           },
-        },--]]
+        },
       },
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
-      -- @type table<string, fun(server:string, opts: table):boolean?>
+      ---@type table<string, fun(server:string, opts: table):boolean?>
       setup = {
         -- example to setup with typescript.nvim
         -- tsserver = function(_, opts)
@@ -167,10 +174,10 @@ local M = {
     config = function(_, opts)
       require("custom.plugins.lsp.diagnostics").setup()
 
-      require("custom.plugins.lsp.ui").setup()
+      require("custom.plugins.lsp.handlers").setup()
 
       require("custom.utils").on_attach(function(client, buffer)
-        -- require("custom.plugins.lsp.format").on_attach(client, buffer)
+        require("custom.plugins.lsp.format").on_attach(client, buffer)
         require("custom.plugins.lsp.keybinds").on_attach(client, buffer)
 
         require("custom.plugins.lsp.codelens").on_attach(client, buffer)
@@ -194,9 +201,9 @@ local M = {
 
       local mlsp = require("mason-lspconfig")
       local all_mlsp_servers =
-          vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
+        vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
 
-      local ensure_installed = {} -- @type string[]
+      local ensure_installed = {} ---@type string[]
       for server, server_opts in pairs(opts.servers) do
         if server_opts then
           server_opts = server_opts == true and {} or server_opts
@@ -213,16 +220,47 @@ local M = {
     end,
   },
 
-  --[[
   {
     "ray-x/lsp_signature.nvim",
     event = "BufReadPost",
     opts = {
       bind = true,
-      fix_pos = true,
       hint_scheme = "Comment",
       handler_opts = { border = moduleObject.styles.border },
     },
+  },
+
+  --[[
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = function()
+      local nls = require("null-ls")
+
+      return {
+        border = moduleObject.styles.border,
+        sources = {
+          -- lua
+          nls.builtins.formatting.stylua.with({
+            condition = function(utils)
+              return vim.fn.executable("stylua")
+                and utils.root_has_file({ "stylua.toml", ".stylua.toml" })
+            end,
+          }),
+
+          -- shell
+          nls.builtins.diagnostics.shellcheck,
+          nls.builtins.formatting.shfmt.with({
+            extra_args = { "-i", "2", "-ci", "-bn" },
+          }),
+
+          -- markdown
+          nls.builtins.formatting.markdownlint,
+          nls.builtins.diagnostics.markdownlint,
+        },
+        root_dir = require("null-ls.utils").root_pattern("Makefile", ".vim", ".git"),
+      }
+    end,
   },
   --]]
 }
