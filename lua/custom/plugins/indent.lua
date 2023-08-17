@@ -15,7 +15,7 @@ local M = {
     "echasnovski/mini.indentscope",
     event = { "BufReadPre", "BufNewFile" },
     opts = {
-      symbol = I.indent.solid,
+      symbol = I.indent.dash,
       options = {
         try_as_border = true,
         indent_at_cursor = false,
