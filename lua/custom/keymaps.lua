@@ -71,3 +71,8 @@ keymap("n", "<leader>e", "<Cmd>Explore<CR>", { desc = "Open Netrw" })
 
 -- Undotree
 keymap('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = "Open undotree for git" })
+
+-- Replace World
+keymap('n', '<leader>s', ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>',
+  { silent = false, desc = "Replace word" })
+keymap('n', '<leader>x', '<cmd>!chmod +x %<CR>', { desc = "Excutable file" })
