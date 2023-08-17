@@ -9,7 +9,7 @@ local M = {
       window = {
         completion = {
           -- border = moduleObject.styles.border,
-          winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+          -- winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
         },
         documentation = {
           border = moduleObject.styles.border,
@@ -62,7 +62,7 @@ local M = {
         end, { "i", "s", "c" }),
         ["<M-h>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+            cmp.select_prev_item({ behavior = select })
           elseif luasnip.locally_jumpable(-1) then
             luasnip.jump(-1)
           else
@@ -73,7 +73,7 @@ local M = {
         ["<C-e>"] = { i = cmp.mapping.abort(), c = cmp.mapping.close() },
         ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-8), { "i", "c" }),
         ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(8), { "i", "c" }),
-        -- ["<C-c>"] = cmp.mapping.complete(),
+        -- ["<C-space>"] = cmp.mapping.complete(),
         ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = select }), { "i", "c" }),
         ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = select }), { "i", "c" }),
       },
@@ -84,6 +84,7 @@ local M = {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-nvim-lsp",
     "saadparwaiz1/cmp_luasnip",
+    -- "rafamadriz/friendly-snippets",
     {
       "L3MON4D3/LuaSnip",
       build = "make install_jsregexp",
