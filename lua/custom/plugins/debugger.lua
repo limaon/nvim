@@ -165,8 +165,7 @@ local M = {
         -- vim.api.nvim_win_set_option(win, "statuscolumn", "")
       end),
     })
-  end,
---]]
+  end, ]]
 }
 
 return M
