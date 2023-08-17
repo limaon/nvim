@@ -1,84 +1,43 @@
 local M = {
-  "catppuccin/nvim",
-  name = "catppuccin",
-  lazy = false,
-  priority = 1000,
-  build = ":CatppuccinCompile",
-  opts = {
-    flavour = moduleObject.styles.transparent and "mocha" or "macchiato",
-    transparent_background = moduleObject.styles.transparent,
-    styles = {
-      keywords = { "bold" },
-      functions = { "italic" },
-    },
-    integrations = {
-      leap = true,
-      mason = true,
-      which_key = true,
-      ts_rainbow = false,
-      dap = { enabled = true, enable_ui = true },
-      telescope = { enabled = true, style = moduleObject.styles.transparent and nil or "nvchad" },
-    },
-    custom_highlights = function(colors)
-      return {
-        -- custom
-        PanelHeading = {
-          fg = colors.lavender,
-          bg = moduleObject.styles.transparent and "NONE" or colors.crust,
-          style = { "bold", "italic" },
-        },
+  {
+    "svrana/neosolarized.nvim",
+    lazy = false,
+    priority = 1000,
+    dependencies = { "tjdevries/colorbuddy.nvim" },
+    config = function ()
+      local neosolarized, colorbuddy = require("neosolarized"), require("colorbuddy.init")
+      neosolarized.setup({
+        comment_italics = true,
+        background_set = false,
+      })
+      local Color = colorbuddy.Color
+      local colors = colorbuddy.colors
+      local Group = colorbuddy.Group
+      local groups = colorbuddy.groups
+      local styles = colorbuddy.styles
 
-        -- lazy.nvim
-        LazyH1 = {
-          bg = moduleObject.styles.transparent and "NONE" or colors.peach,
-          fg = moduleObject.styles.transparent and colors.lavender or colors.base,
-          style = { "bold" },
-        },
-        LazyButton = {
-          bg = "NONE",
-          fg = moduleObject.styles.transparent and colors.overlay0 or colors.subtext0,
-        },
-        LazyButtonActive = {
-          bg = moduleObject.styles.transparent and "NONE" or colors.overlay1,
-          fg = moduleObject.styles.transparent and colors.lavender or colors.base,
-          style = { " bold" },
-        },
-        LazySpecial = { fg = colors.sapphire },
+      Color.new('black', '#000000')
+      Group.new('CursorLine', colors.none, colors.base03, styles.NONE, colors.base1)
+      Group.new('CursorLineNr', colors.yellow, colors.black, styles.NONE, colors.base1)
+      Group.new('Visual', colors.none, colors.base03, styles.reverse)
+      Group.new("NormalFloat", colors.base0, Color.none)
 
-        CmpItemMenu = { fg = colors.subtext1 },
-        MiniIndentscopeSymbol = { fg = colors.overlay0 },
+      local cError = groups.Error.fg
+      local cInfo = groups.Information.fg
+      local cWarn = groups.Warning.fg
+      local cHint = groups.Hint.fg
 
-        FloatBorder = {
-          fg = moduleObject.styles.transparent and colors.overlay1 or colors.mantle,
-          bg = moduleObject.styles.transparent and "NONE" or colors.mantle,
-        },
+      Group.new("DiagnosticVirtualTextError", cError, cError:dark():dark():dark():dark(), styles.NONE)
+      Group.new("DiagnosticVirtualTextInfo", cInfo, cInfo:dark():dark():dark(), styles.NONE)
+      Group.new("DiagnosticVirtualTextWarn", cWarn, cWarn:dark():dark():dark(), styles.NONE)
+      Group.new("DiagnosticVirtualTextHint", cHint, cHint:dark():dark():dark(), styles.NONE)
+      Group.new("DiagnosticUnderlineError", colors.none, colors.none, styles.undercurl, cError)
+      Group.new("DiagnosticUnderlineWarn", colors.none, colors.none, styles.undercurl, cWarn)
+      Group.new("DiagnosticUnderlineInfo", colors.none, colors.none, styles.undercurl, cInfo)
+      Group.new("DiagnosticUnderlineHint", colors.none, colors.none, styles.undercurl, cHint)
 
-        FloatTitle = {
-          fg = colors.subtext0,
-          bg = moduleObject.styles.transparent and "NONE" or colors.mantle,
-        },
-
-        CursorLine = {
-          bg = "#262a42",
-        },
-
-        StatusLine = {
-          fg = colors.text,
-          bg = colors.surface1,
-        },
-
-        StatusLineNC = {
-          fg = colors.text,
-          bg = colors.surface2,
-        },
-
-      }
     end,
   },
-  config = function(_, opts)
-    require("catppuccin").setup(opts)
-    vim.cmd.colorscheme("catppuccin")
-  end,
 }
 
 return M
