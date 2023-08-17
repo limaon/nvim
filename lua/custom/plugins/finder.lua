@@ -4,15 +4,18 @@ local M = {
   "nvim-telescope/telescope.nvim",
   cmd = "Telescope",
   keys = {
-    { "<leader>ff", "<Cmd>Telescope find_files<CR>",                desc = "Find files" },
-    { "<leader>fw", "<Cmd>Telescope grep_string<CR>",               desc = "Find word" },
-    { "<leader>fr", "<Cmd>Telescope oldfiles<CR>",                  desc = "Recent files" },
-    { "<leader>fc", "<Cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Fuzzy search" },
-    { "<leader>fb", "<Cmd>Telescope buffers<CR>",                   desc = "List buffers" },
-    { "<leader>fd", "<Cmd>Telescope diagnostics<CR>",               desc = "List diagnostics" },
-    { "<leader>fs", U.lsp_symbols("document"),                      desc = "Goto symbol" },
-    { "<leader>fS", U.lsp_symbols("workspace"),                     desc = "Goto symbol (Workspace)" },
-    { "<leader>fR", "<Cmd>Telescope resume<CR>",                    desc = "Resume" },
+    { "<leader>ff", "<Cmd>Telescope find_files<CR>", desc = "Telescope Find files" },
+    { "<leader>fw", "<Cmd>Telescope grep_string<CR>", desc = "Telescope Find word" },
+    { "<leader>fc", "<Cmd>Telescope current_buffer_fuzzy_find theme=dropdown<CR>", desc = "Telescope Fuzzy search" },
+    { "<leader>fb", "<Cmd>Telescope buffers<CR>", desc = "Telescope List buffers" },
+    { "<leader>fd", "<Cmd>Telescope diagnostics<CR>", desc = "Telescope List diagnostics" },
+    { "<leader>fh", "<Cmd>Telescope help_tags<CR>", desc = "Telescope List help tags" },
+    { "<leader>fk", "<Cmd>Telescope keymaps<CR>", desc = "Telescope List all keymaps" },
+    { "<leader>fR", "<Cmd>Telescope resume<CR>", desc = "Telescope Resume" },
+    { "<leader>fs", "<Cmd>Telescope lsp_document_symbols<CR>", desc = "Telescope Goto symbol" },
+    { "<leader>fS", U.lsp_symbols("workspace"), desc = "Lsp Goto symbol (Workspace)" },
+    -- { "<leader>fs", U.lsp_symbols("document "), desc = "Goto symbol" },
+    -- { "<leader>fr", "<Cmd>Telescope oldfiles theme=dropdown <CR>", desc = "Recent files" },
   },
   opts = function()
     local actions = require("telescope.actions")
@@ -25,7 +28,7 @@ local M = {
         selection_caret = I.misc.fish .. " ",
         file_ignore_patterns = {
           "%.jpg", "%.jpeg", "%.png", "%.otf",
-          "%.ttf", ".git/", "dist/", "node_modules/",
+          "%.ttf", ".git/", "dist/", ".venv/", "node_modules/",
           "site-packages/", "__pycache__/", "migrations/",
           ".mypy_cache/", "package-lock.json", "yarn.lock",
           "pnpm-lock.yaml", ".DS_Store",
@@ -96,78 +99,16 @@ local M = {
     {
       "nvim-telescope/telescope-live-grep-args.nvim",
       keys = {
-        { "<leader>fg", "<Cmd>Telescope live_grep_args<CR>", desc = "Find in files (Grep)" },
+        { "<leader>fg", "<Cmd>Telescope live_grep_args theme=dropdown<CR>", desc = "Find in files (Grep)" },
       },
       config = function()
         require("telescope").load_extension("live_grep_args")
       end,
     },
     {
-      "folke/todo-comments.nvim",
-      dependencies = { "nvim-lua/plenary.nvim" },
-      keys = {
-        {
-          "[t",
-          function()
-            require("todo-comments").jump_prev()
-          end,
-          desc = "Prev todo comment",
-        },
-        {
-          "]t",
-          function()
-            require("todo-comments").jump_next()
-          end,
-          desc = "Next todo comment",
-        },
-        { "<leader>ft", "<Cmd>Telescope todo-comments todo<CR>", desc = "List todo" },
-      },
-      opts = function()
-        local colors = require("catppuccin.palettes").get_palette()
-
-        return {
-          keywords = {
-            FIX = {
-              icon = I.todo.fix,
-              color = "fix",
-              alt = { "FIXME", "BUG", "FIXIT", "ISSUE" },
-            },
-            TODO = { icon = I.todo.todo, color = "todo" },
-            HACK = { icon = I.todo.hack, color = "hack" },
-            WARN = { icon = I.todo.warn, color = "warn", alt = { "WARNING", "XXX" } },
-            PERF = { icon = I.todo.perf, color = "perf", alt = { "OPTIM" } },
-            NOTE = { icon = I.todo.note, color = "note" },
-            TEST = {
-              icon = I.todo.test,
-              color = "test",
-              alt = { "PASSED", "FAILED" },
-            },
-          },
-          highlight = {
-            before = "",
-            keyword = "wide_fg",
-            after = "",
-          },
-          colors = {
-            fix = { colors.red },
-            todo = { colors.green },
-            hack = { colors.peach },
-            warn = { colors.yellow },
-            perf = { colors.mauve },
-            note = { colors.blue },
-            test = { colors.sky },
-          },
-        }
-      end,
-      config = function(_, opts)
-        require("todo-comments").setup(opts)
-        require("telescope").load_extension("todo-comments")
-      end,
-    },
-    {
       "ahmedkhalf/project.nvim",
       keys = {
-        { "<leader>fp", "<Cmd>Telescope projects<CR>", desc = "Recent projects" },
+        { "<leader>fp", "<Cmd>Telescope projects theme=dropdown<CR>", desc = "Recent projects" },
       },
       opts = {
         manual_mode = false,
