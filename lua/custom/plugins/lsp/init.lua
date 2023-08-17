@@ -6,8 +6,8 @@ local M = {
       {
         "neovim/nvim-lspconfig",
         keys = {
-          { "<leader>ll", "<CMD>LspLog<CR>", desc = "Lsp Log" },
-          { "<leader>li", "<CMD>LspInfo<CR>", desc = "Lsp Info" },
+          { "<leader>ll", "<CMD>LspLog<CR>",     desc = "Lsp Log" },
+          { "<leader>li", "<CMD>LspInfo<CR>",    desc = "Lsp Info" },
           { "<leader>lr", "<CMD>LspRestart<CR>", desc = "Lsp Restart" },
         },
       },
@@ -43,6 +43,7 @@ local M = {
     opts = {
       servers = {
         bashls = {},
+        dockerls = {},
         cssls = {},
         eslint = {
           on_attach = function()
@@ -65,7 +66,7 @@ local M = {
             })
           end,
         },
-        --[[ 
+        --[[
         gopls = {
           settings = {
             gopls = {
@@ -120,6 +121,7 @@ local M = {
         lua_ls = {
           settings = {
             Lua = {
+              diagnostics = { globals = { 'vim' } },
               format = { enable = true },
               telemetry = { enable = false },
               workspace = { checkThirdParty = false },
@@ -136,7 +138,7 @@ local M = {
             "typescriptreact",
           },
         },
-        --[[ 
+        --[[
         yamlls = {
           settings = {
             yaml = {
@@ -165,7 +167,7 @@ local M = {
       require("custom.plugins.lsp.handlers").setup()
 
       require("custom.utils").on_attach(function(client, buffer)
-        require("custom.plugins.lsp.format").on_attach(client, buffer)
+        -- require("custom.plugins.lsp.format").on_attach(client, buffer)
         require("custom.plugins.lsp.keybinds").on_attach(client, buffer)
 
         require("custom.plugins.lsp.codelens").on_attach(client, buffer)
@@ -189,7 +191,7 @@ local M = {
 
       local mlsp = require("mason-lspconfig")
       local all_mlsp_servers =
-        vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
+          vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
 
       local ensure_installed = {} -- @type string[]
       for server, server_opts in pairs(opts.servers) do
@@ -208,6 +210,7 @@ local M = {
     end,
   },
 
+  --[[
   {
     "ray-x/lsp_signature.nvim",
     event = "BufReadPost",
@@ -216,39 +219,6 @@ local M = {
       hint_scheme = "Comment",
       handler_opts = { border = moduleObject.styles.border },
     },
-  },
-
-  --[[ 
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    opts = function()
-      local nls = require("null-ls")
-
-      return {
-        border = moduleObject.styles.border,
-        sources = {
-          -- lua
-          nls.builtins.formatting.stylua.with({
-            condition = function(utils)
-              return vim.fn.executable("stylua")
-                and utils.root_has_file({ "stylua.toml", ".stylua.toml" })
-            end,
-          }),
-
-          -- shell
-          nls.builtins.diagnostics.shellcheck,
-          nls.builtins.formatting.shfmt.with({
-            extra_args = { "-i", "2", "-ci", "-bn" },
-          }),
-
-          -- markdown
-          nls.builtins.formatting.markdownlint,
-          nls.builtins.diagnostics.markdownlint,
-        },
-        root_dir = require("null-ls.utils").root_pattern("Makefile", ".vim", ".git"),
-      }
-    end,
   },
   --]]
 }
