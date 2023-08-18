@@ -1,5 +1,5 @@
 return {
-  --[[ 
+  --[[
   {
     "nvim-neotest/neotest",
     keys = {

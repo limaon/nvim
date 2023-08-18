@@ -1,12 +1,12 @@
 local M = {
   -- library used by other plugins
-  { "nvim-lua/plenary.nvim",       lazy = true },
+  { "nvim-lua/plenary.nvim", lazy = true },
 
   -- icons
   { "nvim-tree/nvim-web-devicons", lazy = true },
 
   -- undotree
-  { "mbbill/undotree",             event = "VeryLazy" },
+  { "mbbill/undotree", event = "VeryLazy" },
 
   {
     "NvChad/nvim-colorizer.lua",
@@ -16,7 +16,7 @@ local M = {
       return opts.filetypes or {}
     end,
     opts = {
-      filetypes = { "vue", "css", "scss", "less", "html" },
+      filetypes = { "vue", "css", "scss", "less", "html", "lua" },
       buftypes = { "*", "!prompt", "!popup" },
       user_default_options = {
         names = false,
