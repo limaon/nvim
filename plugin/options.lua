@@ -56,7 +56,7 @@ o.autochdir = true
 
 o.colorcolumn = "80"
 
-o.statusline = "%<%f %h%m%r%= %y (" .. vim.o.encoding .. ") L:%l/%L C:%c "
+o.statusline = "%<%f %h%m%r %=  %y |" .. vim.o.encoding .. "| L:%l C:%c P:%P "
 
 -- o.guicursor = ''
 
@@ -70,15 +70,15 @@ opt.fillchars = {
 }
 
 -- Wild in command mode
-o.showcmd = false
-
-o.showmode = false
-
+o.showcmd = true
+o.showmode = true
 o.cmdheight = 1
 
+o.wildmenu = true
 o.wildoptions = "pum"
 o.wildignorecase = true
-o.wildmode = "list:longest,list:full"
+-- o.wildmode = "list:longest,list:full"
+o.wildmode = "longest:full,full"
 o.wildignore = "*.o,*.obj,*.pyc,*.class,**/node_modules/*,**/.git/*"
 
 -- Match and search
@@ -126,9 +126,9 @@ vim.g.markdown_recommended_style = 0
 -- Options for Netrw native file browser
 vim.g.netrw_fastbrowse = 0
 vim.g.netrw_banner = 0
-vim.g.netrw_list_hide = '\\(\\^\\|\\s\\s\\)\\zs\\.\\S+\\,\\(\\^\\|\\s\\s\\)ntuser\\.\\S+'
+vim.g.netrw_hide = 1
+vim.g.netrw_list_hide = '.git,*.bak,*.swp,*.~,*.tmp,*.temp,node_modules,__pycache__'
 vim.g.netrw_liststyle = 0
 vim.g.netrw_winsize = 20
-vim.g.netrw_hide = 0
 vim.g.netrw_localmovecmd = 'mv -f'
 vim.g.netrw_localrmdir = 'rm -r'
