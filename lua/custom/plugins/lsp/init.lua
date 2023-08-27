@@ -174,7 +174,7 @@ local M = {
         require("custom.plugins.lsp.highlight").on_attach(client, buffer)
       end)
 
-      -- @param server string lsp server name
+      ---@param server string lsp server name
       local function setup_server(server)
         local config = require("custom.utils").resolve_config(server, opts.servers[server] or {})
         if opts.setup[server] then

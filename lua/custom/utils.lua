@@ -5,29 +5,29 @@ local fmt = string.format
 -------------------------------------------------------------------------------
 -- Augroup
 -------------------------------------------------------------------------------
--- @class AutocmdArgs
--- @field id number
--- @field event string
--- @field group string?
--- @field buf number
--- @field file string
--- @field match string | number
--- @field data any
+---@class AutocmdArgs
+---@field id number
+---@field event string
+---@field group string?
+---@field buf number
+---@field file string
+---@field match string | number
+---@field data any
 
--- @class Autocommand
--- @field desc string
--- @field event  string | string[] autocommand events
--- @field pattern string | string[] autocommand patterns
--- @field command string | fun(args: AutocmdArgs): boolean?
--- @field nested  boolean
--- @field once    boolean
--- @field buffer  number
+---@class Autocommand
+---@field desc string
+---@field event  string | string[] autocommand events
+---@field pattern string | string[] autocommand patterns
+---@field command string | fun(args: AutocmdArgs): boolean?
+---@field nested  boolean
+---@field once    boolean
+---@field buffer  number
 
--- Create an autocommand
--- returns the group ID so that it can be cleared or maipulated.
--- @param name string The name of the autocommand group
--- @param ... Autocommand A list of autocommands to create
--- @return number augroup_id
+---Create an autocommand
+---returns the group ID so that it can be cleared or maipulated.
+---@param name string The name of the autocommand group
+---@param ... Autocommand A list of autocommands to create
+---@return number augroup_id
 function M.augroup(name, ...)
   local commands = { ... }
   assert(name ~= "User", "The name of an augroup CANNOT be User")
@@ -51,7 +51,7 @@ end
 
 ---Clean autocommand in a group if it exists
 ---This is safer than trying to delete the augroup itself
--- -@param name string augroup name
+---@param name string augroup name
 function M.clear_augroup(name)
   vim.schedule(function()
     pcall(function()
@@ -61,15 +61,15 @@ function M.clear_augroup(name)
 end
 
 ---Check if the plugin exists
--- -@param plugin string plugin name
--- -@return boolean
+---@param plugin string plugin name
+---@return boolean
 function M.has(plugin)
   return require("lazy.core.config").spec.plugins[plugin] ~= nil
 end
 
 ---Get the specified plugin opts
--- -@param name string plugin name
--- -@return table plugin_opts
+---@param name string plugin name
+---@return table plugin_opts
 function M.opts(name)
   local plugin = require("lazy.core.config").plugins[name]
   if not plugin then
@@ -80,9 +80,8 @@ function M.opts(name)
 end
 
 ---list providers
--- -@param filetype string filetype
--- -@return table providers null-ls providers
---[[
+---@param filetype string filetype
+---@return table providers null-ls providers
 function M.list_registered_providers_names(filetype)
   local sources = require("null-ls.sources")
   local available_sources = sources.get_available(filetype)
@@ -95,24 +94,19 @@ function M.list_registered_providers_names(filetype)
   end
   return registered
 end
---]]
 
 ---list registered formatters
--- -@param filetype string filetype
--- -@return string[] providers name of the providers
-
---[[
+---@param filetype string filetype
+---@return string[] providers name of the providers
 function M.list_registered_formatters(filetype)
   local method = require("null-ls").methods.FORMATTING
   local providers = M.list_registered_providers_names(filetype)
   return providers[method] or {}
 end
---]]
 
 ---list registered linters
--- -@param filetype string filetype
--- -@return string[] providers name of the providers
---[[ 
+---@param filetype string filetype
+---@return string[] providers name of the providers
 function M.list_registered_linters(filetype)
   local nls = require("null-ls")
   local providers = M.list_registered_providers_names(filetype)
@@ -125,12 +119,11 @@ function M.list_registered_linters(filetype)
   }))
   return names
 end
---]]
 
 --- LSP utils
 
--- -@enum
--- https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#serverCapabilities
+---@enum
+--https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#serverCapabilities
 M.lsp_providers = {
   HOVER = "hoverProvider",
   RENAME = "renameProvider",
@@ -147,7 +140,7 @@ M.lsp_providers = {
 }
 
 ---Setup lsp autocmds
--- -@param func fun(client, buffer)
+---@param func fun(client, buffer)
 function M.on_attach(func)
   M.augroup("LspSetupCommands", {
     event = "LspAttach",
@@ -164,8 +157,8 @@ end
 
 ---This function allows reading a per project `settings.josn` file
 ---in the `.vim` directory of the project
--- -@param client table<string, any> lsp client
--- -@return boolean
+---@param client table<string, any> lsp client
+---@return boolean
 function M.common_on_init(client)
   local settings = fmt("%s/%s/settings.json", client.workspace_folders[1].name, moduleObject.settings.metadir)
   if vim.fn.filereadable(settings) == 0 then
@@ -200,7 +193,7 @@ function M.common_on_init(client)
 end
 
 ---LSP capabilities
--- -@return table capabilities
+---@return table capabilities
 function M.common_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   -- Tell the server the capability of foldingRange :: nvim-ufo
@@ -212,9 +205,9 @@ function M.common_capabilities()
 end
 
 ---Resolve lsp config
--- -@param name string lsp server name
--- -@param ... table a list lsp config
--- -@return table config lsp config
+---@param name string lsp server name
+---@param ... table a list lsp config
+---@return table config lsp config
 function M.resolve_config(name, ...)
   local defaults = {
     on_init = M.common_on_init,
@@ -232,7 +225,7 @@ function M.resolve_config(name, ...)
 end
 
 ---https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
--- -@param scope "workspace" | "document"
+---@param scope "workspace" | "document"
 function M.lsp_symbols(scope)
   local symbols = {
     "File", "Module", "Namespace",
@@ -258,7 +251,7 @@ end
 
 -- Find files or live grep in the directory where the cursor is located
 -- Or in the directory where the file under the cursor is located
--- -@param action "find" | "grep"
+---@param action "find" | "grep"
 function M.find_or_grep(action, state)
   if M.has("telescope.nvim") then
     local node = state.tree:get_node()
