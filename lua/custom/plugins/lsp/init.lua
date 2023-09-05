@@ -128,6 +128,7 @@ local M = {
             },
           },
         },
+        vimls = {},
         volar = {
           -- take over Typescript
           filetypes = {
@@ -174,7 +175,7 @@ local M = {
     config = function(_, opts)
       require("custom.plugins.lsp.diagnostics").setup()
 
-      require("custom.plugins.lsp.handlers").setup()
+      require("custom.plugins.lsp.ui").setup()
 
       require("custom.utils").on_attach(function(client, buffer)
         require("custom.plugins.lsp.format").on_attach(client, buffer)
@@ -225,6 +226,7 @@ local M = {
     event = "BufReadPost",
     opts = {
       bind = true,
+      fix_pos = true,
       hint_scheme = "Comment",
       handler_opts = { border = moduleObject.styles.border },
     },
