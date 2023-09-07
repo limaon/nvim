@@ -85,9 +85,7 @@ end
 function M.on_load(name, fn)
   local Config = require("lazy.core.config")
   if Config.plugins[name] and Config.plugins[name]._.loaded then
-    vim.schedule(function()
-      fn(name)
-    end)
+    fn(name)
   else
     vim.api.nvim_create_autocmd("User", {
       pattern = "LazyLoad",
@@ -203,8 +201,7 @@ end
 ---@param client table<string, any> lsp client
 ---@return boolean
 function M.common_on_init(client)
-  local settings = fmt("%s/%s/settings.json", client.workspace_folders[1].name,
-    moduleObject.settings.metadir)
+  local settings = fmt("%s/%s/settings.json", client.workspace_folders[1].name, mo.settings.metadir)
   if vim.fn.filereadable(settings) == 0 then
     return true
   end
@@ -244,15 +241,15 @@ function M.common_capabilities()
     vim.lsp.protocol.make_client_capabilities(),
     M.has("cmp-nvim-lsp") and require("cmp_nvim_lsp").default_capabilities() or {},
     M.has("nvim-ufo")
-    and {
-      textDocument = {
-        foldingRange = {
-          dynamicRegistration = false,
-          lineFoldingOnly = true,
-        },
-      },
-    }
-    or {}
+        and {
+          textDocument = {
+            foldingRange = {
+              dynamicRegistration = false,
+              lineFoldingOnly = true,
+            },
+          },
+        }
+      or {}
   )
 end
 
@@ -266,7 +263,7 @@ function M.resolve_config(name, ...)
     capabilities = M.common_capabilities(),
   }
 
-  local has_provider, cfg = pcall(require, "custom.plugins.lsp.providers." .. name)
+  local has_provider, cfg = pcall(require, "mvim.plugins.lsp.providers." .. name)
   if has_provider then
     defaults = vim.tbl_deep_extend("force", defaults, cfg) or {}
   end
@@ -280,15 +277,32 @@ end
 ---@param scope "workspace" | "document"
 function M.lsp_symbols(scope)
   local symbols = {
-    "File", "Module", "Namespace",
-    "Package", "Class", "Method",
-    "Property", "Field", "Constructor",
-    "Enum", "Interface", "Function",
-    "Variable", "Constant", "String",
-    "Number", "Boolean", "Array",
-    "Object", "Key", "Null",
-    "EnumMember", "Struct", "Event",
-    "Operator", "TypeParameter",
+    "File",
+    "Module",
+    "Namespace",
+    "Package",
+    "Class",
+    "Method",
+    "Property",
+    "Field",
+    "Constructor",
+    "Enum",
+    "Interface",
+    "Function",
+    "Variable",
+    "Constant",
+    "String",
+    "Number",
+    "Boolean",
+    "Array",
+    "Object",
+    "Key",
+    "Null",
+    "EnumMember",
+    "Struct",
+    "Event",
+    "Operator",
+    "TypeParameter",
   }
   return function()
     vim.ui.select(symbols, { prompt = "Select which symbol" }, function(item)
@@ -314,7 +328,7 @@ function M.find_or_grep(action, state)
       require("telescope.utils").transform_path({ path_display = { "shorten" } }, path)
     )
     local func = action == "grep" and require("telescope").extensions.live_grep_args.live_grep_args
-        or require("telescope.builtin").find_files
+      or require("telescope.builtin").find_files
 
     func({
       cwd = path,
@@ -335,6 +349,27 @@ function M.find_or_grep(action, state)
         return true
       end,
     })
+  end
+end
+
+---@param from string
+---@param to string
+function M.on_renamed(from, to)
+  local clients = vim.lsp.get_active_clients()
+  for _, client in ipairs(clients) do
+    if client.supports_method("workspace/willRenameFiles") then
+      local resp = client.request_sync("workspace/willRenameFiles", {
+        files = {
+          {
+            oldUri = vim.uri_from_fname(from),
+            newUri = vim.uri_from_fname(to),
+          },
+        },
+      }, 1000, 0)
+      if resp and resp.result ~= nil then
+        vim.lsp.util.apply_workspace_edit(resp.result, client.offset_encoding)
+      end
+    end
   end
 end
 
