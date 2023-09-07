@@ -9,11 +9,11 @@
   },
   "SchemaStore.nvim": {
     "branch": "main",
-    "commit": "9d7b4c8d1c2ad029234d531871a55c075a116b7d"
+    "commit": "df8bece94cf1ac036262bba7411b3cdda52f025c"
   },
   "alpha-nvim": {
     "branch": "main",
-    "commit": "5f211a1597b06be24b1600d72a62b94cab1e2df9"
+    "commit": "331d55eb18d6e42bda4a183863a681be3ee11370"
   },
   "bufferline.nvim": {
     "branch": "main",
@@ -53,7 +53,7 @@
   },
   "gitsigns.nvim": {
     "branch": "main",
-    "commit": "d927caa075df63bf301d92f874efb72fd22fd3b4"
+    "commit": "bf6b0bbc527c546ecd6af2bb9fcd06864ae0852c"
   },
   "indent-blankline.nvim": {
     "branch": "master",
@@ -62,10 +62,6 @@
   "lazy.nvim": {
     "branch": "main",
     "commit": "2a9354c7d2368d78cbd5575a51a2af5bd8a6ad01"
-  },
-  "lsp_signature.nvim": {
-    "branch": "master",
-    "commit": "58d4e810801da74c29313da86075d6aea537501f"
   },
   "lualine.nvim": {
     "branch": "master",
@@ -109,7 +105,7 @@
   },
   "nui.nvim": {
     "branch": "main",
-    "commit": "aa1b4c1e05983ff7debd2b4b2788651db099de2f"
+    "commit": "c8de23342caf8d50b15d6b28368d36a56a69d76f"
   },
   "null-ls.nvim": {
     "branch": "main",
@@ -129,7 +125,7 @@
   },
   "nvim-dap": {
     "branch": "master",
-    "commit": "31e1ece773e10448dcb616d5144290946a6264b7"
+    "commit": "0e6b7c47dd70e80793ed39271b2aa712d9366dbc"
   },
   "nvim-dap-ui": {
     "branch": "master",
@@ -141,7 +137,7 @@
   },
   "nvim-lspconfig": {
     "branch": "master",
-    "commit": "499314f76fa6e8f82f7cfd116578906d61ba2560"
+    "commit": "0517d8522dcec286b1dba47aa3ee1ed8f523aed6"
   },
   "nvim-surround": {
     "branch": "main",
@@ -149,7 +145,7 @@
   },
   "nvim-treesitter": {
     "branch": "master",
-    "commit": "30604fd7dde5abcba7ca8f5761894dfa61febe51"
+    "commit": "80b4fa7970ee159e5c2c715bbcd386143c48dcb1"
   },
   "nvim-treesitter-textobjects": {
     "branch": "master",
@@ -213,7 +209,7 @@
   },
   "toggleterm.nvim": {
     "branch": "main",
-    "commit": "12cba0a1967b4f3f31903484dec72a6100dcf515"
+    "commit": "f2c720746238bc3ec620fe4bf92b58368317c266"
   },
   "undotree": {
     "branch": "master",
