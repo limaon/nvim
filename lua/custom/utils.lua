@@ -328,7 +328,7 @@ function M.find_or_grep(action, state)
       require("telescope.utils").transform_path({ path_display = { "shorten" } }, path)
     )
     local func = action == "grep" and require("telescope").extensions.live_grep_args.live_grep_args
-      or require("telescope.builtin").find_files
+        or require("telescope.builtin").find_files
 
     func({
       cwd = path,
