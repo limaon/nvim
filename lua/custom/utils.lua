@@ -17,11 +17,11 @@ local fmt = string.format
 ---@class Autocommand
 ---@field desc string
 ---@field event  string | string[] autocommand events
----@field pattern string | string[] autocommand patterns
+---@field pattern? string | string[] autocommand patterns
 ---@field command string | fun(args: AutocmdArgs): boolean?
----@field nested  boolean
----@field once    boolean
----@field buffer  number
+---@field nested?  boolean
+---@field once?    boolean
+---@field buffer?  number
 
 ---Create an autocommand
 ---returns the group ID so that it can be cleared or maipulated.
@@ -123,20 +123,20 @@ end
 --- LSP utils
 
 ---@enum
---https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#serverCapabilities
+-- https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#serverCapabilities
 M.lsp_providers = {
-  HOVER = "hoverProvider",
-  RENAME = "renameProvider",
-  CODELENS = "codeLensProvider",
-  REFERENCES = "referencesProvider",
-  CODEACTION = "codeActionProvider",
-  DEFINITION = "definitionProvider",
-  DECLARATION = "declarationProvider",
-  IMPLEMENTATION = "implementationProvider",
-  HIGHLIGHT = "documentHighlightProvider",
-  SIGNATUREHELP = "signatureHelpProvider",
-  FORMATTING = "documentFormattingProvider",
-  RANGEFORMATTING = "documentRangeFormattingProvider",
+  HOVER = "textDocument/hover",
+  RENAME = "textDocument/rename",
+  CODELENS = "textDocument/codeLens",
+  REFERENCES = "textDocument/references",
+  CODEACTION = "textDocument/codeAction",
+  DEFINITION = "textDocument/definition",
+  DECLARATION = "textDocument/declaration*",
+  IMPLEMENTATION = "textDocument/implementation*",
+  HIGHLIGHT = "textDocument/documentHighlight",
+  SIGNATUREHELP = "textDocument/signatureHelp",
+  FORMATTING = "textDocument/formatting",
+  RANGEFORMATTING = "textDocument/rangeFormatting",
 }
 
 ---Setup lsp autocmds
@@ -160,7 +160,8 @@ end
 ---@param client table<string, any> lsp client
 ---@return boolean
 function M.common_on_init(client)
-  local settings = fmt("%s/%s/settings.json", client.workspace_folders[1].name, moduleObject.settings.metadir)
+  local settings = fmt("%s/%s/settings.json", client.workspace_folders[1].name,
+    moduleObject.settings.metadir)
   if vim.fn.filereadable(settings) == 0 then
     return true
   end
@@ -195,13 +196,21 @@ end
 ---LSP capabilities
 ---@return table capabilities
 function M.common_capabilities()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  -- Tell the server the capability of foldingRange :: nvim-ufo
-  capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true,
-  }
-  return require("cmp_nvim_lsp").default_capabilities(capabilities)
+  return vim.tbl_deep_extend(
+    "force",
+    vim.lsp.protocol.make_client_capabilities(),
+    M.has("cmp-nvim-lsp") and require("cmp_nvim_lsp").default_capabilities() or {},
+    M.has("nvim-ufo")
+    and {
+      textDocument = {
+        foldingRange = {
+          dynamicRegistration = false,
+          lineFoldingOnly = true,
+        },
+      },
+    }
+    or {}
+  )
 end
 
 ---Resolve lsp config
@@ -262,7 +271,7 @@ function M.find_or_grep(action, state)
       require("telescope.utils").transform_path({ path_display = { "shorten" } }, path)
     )
     local func = action == "grep" and require("telescope").extensions.live_grep_args.live_grep_args
-      or require("telescope.builtin").find_files
+        or require("telescope.builtin").find_files
 
     func({
       cwd = path,

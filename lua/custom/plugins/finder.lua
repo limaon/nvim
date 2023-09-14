@@ -4,16 +4,66 @@ local M = {
   "nvim-telescope/telescope.nvim",
   cmd = "Telescope",
   keys = {
-    { "<leader>ff", "<Cmd>Telescope find_files<CR>", desc = "Telescope Find files" },
-    { "<leader>fw", "<Cmd>Telescope grep_string<CR>", desc = "Telescope Find word" },
-    { "<leader>fc", "<Cmd>Telescope current_buffer_fuzzy_find theme=dropdown<CR>", desc = "Telescope Fuzzy search" },
-    { "<leader>fb", "<Cmd>Telescope buffers<CR>", desc = "Telescope List buffers" },
-    { "<leader>fd", "<Cmd>Telescope diagnostics<CR>", desc = "Telescope List diagnostics" },
-    { "<leader>fh", "<Cmd>Telescope help_tags<CR>", desc = "Telescope List help tags" },
-    { "<leader>fk", "<Cmd>Telescope keymaps<CR>", desc = "Telescope List all keymaps" },
-    { "<leader>fR", "<Cmd>Telescope resume<CR>", desc = "Telescope Resume" },
-    { "<leader>fs", "<Cmd>Telescope lsp_document_symbols<CR>", desc = "Telescope Goto symbol" },
-    { "<leader>fS", U.lsp_symbols("workspace"), desc = "Lsp Goto symbol (Workspace)" },
+    {
+      "<leader>ff",
+      "<Cmd>Telescope find_files<CR>",
+      desc =
+      "Telescope Find files"
+    },
+    {
+      "<leader>fw",
+      "<Cmd>Telescope grep_string<CR>",
+      desc =
+      "Telescope Find word"
+    },
+    {
+      "<leader>fc",
+      "<Cmd>Telescope current_buffer_fuzzy_find theme=dropdown<CR>",
+      desc =
+      "Telescope Fuzzy search"
+    },
+    {
+      "<leader>fb",
+      "<Cmd>Telescope buffers<CR>",
+      desc =
+      "Telescope List buffers"
+    },
+    {
+      "<leader>fd",
+      "<Cmd>Telescope diagnostics<CR>",
+      desc =
+      "Telescope List diagnostics"
+    },
+    {
+      "<leader>fh",
+      "<Cmd>Telescope help_tags<CR>",
+      desc =
+      "Telescope List help tags"
+    },
+    {
+      "<leader>fk",
+      "<Cmd>Telescope keymaps<CR>",
+      desc =
+      "Telescope List all keymaps"
+    },
+    {
+      "<leader>fR",
+      "<Cmd>Telescope resume<CR>",
+      desc =
+      "Telescope Resume"
+    },
+    {
+      "<leader>fs",
+      "<Cmd>Telescope lsp_document_symbols<CR>",
+      desc =
+      "Telescope Goto symbol"
+    },
+    {
+      "<leader>fS",
+      U.lsp_symbols("workspace"),
+      desc =
+      "Lsp Goto symbol (Workspace)"
+    },
     -- { "<leader>fs", U.lsp_symbols("document "), desc = "Goto symbol" },
     -- { "<leader>fr", "<Cmd>Telescope oldfiles theme=dropdown <CR>", desc = "Recent files" },
   },
@@ -27,11 +77,22 @@ local M = {
         prompt_prefix = I.misc.telescope .. " ",
         selection_caret = I.misc.fish .. " ",
         file_ignore_patterns = {
-          "%.jpg", "%.jpeg", "%.png", "%.otf",
-          "%.ttf", ".git/", "dist/", ".venv/", "node_modules/",
-          "site-packages/", "__pycache__/", "migrations/",
-          ".mypy_cache/", "package-lock.json", "yarn.lock",
-          "pnpm-lock.yaml", ".DS_Store",
+          "%.jpg",
+          "%.jpeg",
+          "%.png",
+          "%.otf",
+          "%.ttf",
+          "%.DS_Store",
+          "%.git/",
+          "%.mypy_cache/",
+          "dist/",
+          "node_modules/",
+          "site-packages/",
+          "__pycache__/",
+          "migrations/",
+          "package-lock.json",
+          "yarn.lock",
+          "pnpm-lock.yaml",
         },
         layout_config = {
           height = 0.9,
@@ -99,7 +160,11 @@ local M = {
     {
       "nvim-telescope/telescope-live-grep-args.nvim",
       keys = {
-        { "<leader>fg", "<Cmd>Telescope live_grep_args theme=dropdown<CR>", desc = "Find in files (Grep)" },
+        {
+          "<leader>fg",
+          "<Cmd>Telescope live_grep_args theme=dropdown<CR>",
+          desc = "Find in files (Grep)"
+        },
       },
       config = function()
         require("telescope").load_extension("live_grep_args")
