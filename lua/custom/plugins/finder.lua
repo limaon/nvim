@@ -109,80 +109,20 @@ local M = {
     {
       "nvim-telescope/telescope-live-grep-args.nvim",
       keys = {
-        { "<leader>fg", "<Cmd>Telescope live_grep_args<CR>", desc = "Find in files (Grep)" },
+        {
+          "<leader>fg",
+          "<Cmd>Telescope live_grep_args theme=dropdown<CR>",
+          desc = "Find in files (Grep)"
+        },
       },
       config = function()
-        U.on_load("telescope.nvim", function()
-          require("telescope").load_extension("live_grep_args")
-        end)
-      end,
-    },
-    {
-      "folke/todo-comments.nvim",
-      dependencies = { "nvim-lua/plenary.nvim" },
-      keys = {
-        {
-          "[t",
-          function()
-            require("todo-comments").jump_prev()
-          end,
-          desc = "Prev todo comment",
-        },
-        {
-          "]t",
-          function()
-            require("todo-comments").jump_next()
-          end,
-          desc = "Next todo comment",
-        },
-        { "<leader>ft", "<Cmd>Telescope todo-comments todo<CR>", desc = "List todo" },
-      },
-      opts = function()
-        return {
-          keywords = {
-            FIX = {
-              icon = I.todo.fix,
-              color = "fix",
-              alt = { "FIXME", "BUG", "FIXIT", "ISSUE" },
-            },
-            TODO = { icon = I.todo.todo, color = "todo" },
-            HACK = { icon = I.todo.hack, color = "hack" },
-            WARN = { icon = I.todo.warn, color = "warn", alt = { "WARNING", "XXX" } },
-            PERF = { icon = I.todo.perf, color = "perf", alt = { "OPTIM" } },
-            NOTE = { icon = I.todo.note, color = "note" },
-            TEST = {
-              icon = I.todo.test,
-              color = "test",
-              alt = { "PASSED", "FAILED" },
-            },
-          },
-          highlight = {
-            before = "",
-            keyword = "wide_fg",
-            after = "",
-          },
-          colors = {
-            fix = { modeleObject.styles.palettes.red },
-            todo = { modeleObject.styles.palettes.green },
-            hack = { modeleObject.styles.palettes.peach },
-            warn = { modeleObject.styles.palettes.yellow },
-            perf = { modeleObject.styles.palettes.mauve },
-            note = { modeleObject.styles.palettes.blue },
-            test = { modeleObject.styles.palettes.sky },
-          },
-        }
-      end,
-      config = function(_, opts)
-        require("todo-comments").setup(opts)
-        U.on_load("telescope.nvim", function()
-          require("telescope").load_extension("todo-comments")
-        end)
+        require("telescope").load_extension("live_grep_args")
       end,
     },
     {
       "ahmedkhalf/project.nvim",
       keys = {
-        { "<leader>fp", "<Cmd>Telescope projects<CR>", desc = "Recent projects" },
+        { "<leader>fp", "<Cmd>Telescope projects theme=dropdown<CR>", desc = "Recent projects" },
       },
       opts = {
         manual_mode = false,
@@ -191,9 +131,7 @@ local M = {
       },
       config = function(_, opts)
         require("project_nvim").setup(opts)
-        U.on_load("telescope.nvim", function()
-          require("telescope").load_extension("projects")
-        end)
+        require("telescope").load_extension("projects")
       end,
     },
   },
