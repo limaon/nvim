@@ -9,7 +9,7 @@
   },
   "SchemaStore.nvim": {
     "branch": "main",
-    "commit": "2a6a5d3e2bc8a5727b6d083d2920d12a392ed05b"
+    "commit": "7b115d9dca286192ffa5b2a254ff61a34006ac3e"
   },
   "alpha-nvim": {
     "branch": "main",
@@ -64,8 +64,8 @@
     "commit": "bce4576a9047085a528c479a7fe1e2f6b787b6c1"
   },
   "indent-blankline.nvim": {
-    "branch": "master",
-    "commit": "9637670896b68805430e2f72cf5d16be5b97a22a"
+    "branch": "v3",
+    "commit": "2a587a8c19631462e90da02945f25890d2a52d37"
   },
   "lazy.nvim": {
     "branch": "main",
@@ -82,10 +82,6 @@
   "mason.nvim": {
     "branch": "main",
     "commit": "d66c60e17dd6fd8165194b1d14d21f7eb2c1697a"
-  },
-  "mini.indentscope": {
-    "branch": "main",
-    "commit": "f60e9b51a6214c73a170ffc5445ce91560981031"
   },
   "neo-tree.nvim": {
     "branch": "v2.x",
@@ -145,7 +141,7 @@
   },
   "nvim-lspconfig": {
     "branch": "master",
-    "commit": "cc388d3f6b9c7c943ae2b2dcd46ad470fd257f91"
+    "commit": "f3195835c0447ee2c80152b893ab51ca162b04a9"
   },
   "nvim-surround": {
     "branch": "main",
@@ -153,7 +149,7 @@
   },
   "nvim-treesitter": {
     "branch": "master",
-    "commit": "f9034812d8335356ef3ede49110d1569624033fa"
+    "commit": "b4f6dd72980607a9821d24502b0ca7ee826376af"
   },
   "nvim-treesitter-textobjects": {
     "branch": "master",
