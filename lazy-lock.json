@@ -43,14 +43,6 @@
     "branch": "master",
     "commit": "18095520391186d634a0045dacaa346291096566"
   },
-  "copilot-cmp": {
-    "branch": "master",
-    "commit": "72fbaa03695779f8349be3ac54fa8bd77eed3ee3"
-  },
-  "copilot.lua": {
-    "branch": "master",
-    "commit": "2c942f33ba5c621c906e625e00a1bb504b65e2f0"
-  },
   "dressing.nvim": {
     "branch": "master",
     "commit": "c1e1d5fa44fe08811b6ef4aadac2b50e602f9504"
@@ -65,7 +57,7 @@
   },
   "indent-blankline.nvim": {
     "branch": "v3",
-    "commit": "2a587a8c19631462e90da02945f25890d2a52d37"
+    "commit": "8a8de7f69a1e2eb548c3a48886d1aebde32c080e"
   },
   "lazy.nvim": {
     "branch": "main",
@@ -82,6 +74,10 @@
   "mason.nvim": {
     "branch": "main",
     "commit": "d66c60e17dd6fd8165194b1d14d21f7eb2c1697a"
+  },
+  "mini.indentscope": {
+    "branch": "main",
+    "commit": "f60e9b51a6214c73a170ffc5445ce91560981031"
   },
   "neo-tree.nvim": {
     "branch": "v2.x",
@@ -117,7 +113,7 @@
   },
   "nvim-autopairs": {
     "branch": "master",
-    "commit": "defad64afbf19381fe31488a7582bbac421d6e38"
+    "commit": "7b3eb9b5813a22188c4dbb248475fcbaf9f4d195"
   },
   "nvim-cmp": {
     "branch": "main",
@@ -233,6 +229,6 @@
   },
   "yanky.nvim": {
     "branch": "main",
-    "commit": "4c85d8d6808d9859e72f8bd6c25302199e6a5eac"
+    "commit": "4f5f15829fbad15ed703e7cb072cdf2a488cf5e7"
   }
 }
