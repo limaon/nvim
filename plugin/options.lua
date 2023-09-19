@@ -77,9 +77,7 @@ o.cmdheight = 1
 o.wildmenu = true
 o.wildoptions = "pum"
 o.wildignorecase = true
--- o.wildmode = "list:longest,list:full"
 o.wildmode = "longest:full,full"
-o.wildignore = "*.o,*.obj,*.pyc,*.class,**/node_modules/*,**/.git/*"
 
 -- Match and search
 o.hlsearch = false
@@ -107,17 +105,7 @@ o.backup = true
 o.backupdir = moduleObject.settings.backupdir
 
 -- Message output on vim actions
-opt.shortmess = {
-  f = true,
-  s = true,
-  o = true,
-  O = true,
-  t = true,
-  T = true,
-  A = true,
-  c = true,
-  F = true,
-}
+opt.shortmess:append({ W = true, I = true, c = true, C = true })
 
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0

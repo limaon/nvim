@@ -66,9 +66,8 @@ moduleObject.styles = {
       test = "",
     },
     indent = {
-      dash = "",
-      -- solid = "│",
-      solid = "▏",
+      dash = "┊",
+      solid = "│",
       last = "└",
     },
     plugin = {
@@ -104,7 +103,7 @@ moduleObject.styles = {
       palette = "",
       plus = "",
       pulse = "",
-      lazy = "",
+      lazy = "󰒲 ",
       milestone = "",
       terminal = "",
       key = "",
@@ -113,7 +112,8 @@ moduleObject.styles = {
       markdown = "",
       clock = "",
       option = "󰘵",
-      progress = {
+      spinners = { "", "󰪞", "󰪟", "󰪠", "󰪢", "󰪣", "󰪤", "󰪥" },
+      scrollbar = {
         "██",
         "▇▇",
         "▆▆",
@@ -136,24 +136,24 @@ moduleObject.styles = {
         variable = "",
         class = "",
         interface = "",
-        module = "",
+        module = "", --
         property = "",
-        unit = "",
-        value = "",
+        unit = "", --
+        value = "", --
         enum = "",
         keyword = "",
         -- snippet = "",
         snippet = "",
         color = "",
-        file = "",
+        file = "", --
         reference = "",
-        folder = "",
+        folder = "", --
         enummember = "",
         constant = "",
         struct = "",
         event = "",
         operator = "",
-        typeparameter = "",
+        typeparameter = "", --
 
         namespace = "",
         package = "?",
@@ -164,6 +164,7 @@ moduleObject.styles = {
         object = "?",
         key = "?",
         null = "?",
+        codeium = "󰘦",
       },
     },
   },
@@ -173,6 +174,7 @@ moduleObject.styles = {
     [[ | | | |  __/ (_) \ V /| | | | | | | ]],
     [[ |_| |_|\___|\___/ \_/ |_|_| |_| |_| ]],
   },
+  palettes = {},
 }
 
 moduleObject.styles.border = moduleObject.styles.transparent and "rounded" or "none"
