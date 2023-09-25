@@ -4,68 +4,15 @@ local M = {
   "nvim-telescope/telescope.nvim",
   cmd = "Telescope",
   keys = {
-    {
-      "<leader>ff",
-      "<Cmd>Telescope find_files<CR>",
-      desc =
-      "Telescope Find files"
-    },
-    {
-      "<leader>fw",
-      "<Cmd>Telescope grep_string<CR>",
-      desc =
-      "Telescope Find word"
-    },
-    {
-      "<leader>fc",
-      "<Cmd>Telescope current_buffer_fuzzy_find theme=dropdown<CR>",
-      desc =
-      "Telescope Fuzzy search"
-    },
-    {
-      "<leader>fb",
-      "<Cmd>Telescope buffers<CR>",
-      desc =
-      "Telescope List buffers"
-    },
-    {
-      "<leader>fd",
-      "<Cmd>Telescope diagnostics<CR>",
-      desc =
-      "Telescope List diagnostics"
-    },
-    {
-      "<leader>fh",
-      "<Cmd>Telescope help_tags<CR>",
-      desc =
-      "Telescope List help tags"
-    },
-    {
-      "<leader>fk",
-      "<Cmd>Telescope keymaps<CR>",
-      desc =
-      "Telescope List all keymaps"
-    },
-    {
-      "<leader>fR",
-      "<Cmd>Telescope resume<CR>",
-      desc =
-      "Telescope Resume"
-    },
-    {
-      "<leader>fs",
-      "<Cmd>Telescope lsp_document_symbols<CR>",
-      desc =
-      "Telescope Goto symbol"
-    },
-    {
-      "<leader>fS",
-      U.lsp_symbols("workspace"),
-      desc =
-      "Lsp Goto symbol (Workspace)"
-    },
-    -- { "<leader>fs", U.lsp_symbols("document "), desc = "Goto symbol" },
-    -- { "<leader>fr", "<Cmd>Telescope oldfiles theme=dropdown <CR>", desc = "Recent files" },
+    { "<leader>ff", "<Cmd>Telescope find_files<CR>", desc = "Find files" },
+    { "<leader>fw", "<Cmd>Telescope grep_string<CR>", desc = "Find word" },
+    { "<leader>fr", "<Cmd>Telescope oldfiles<CR>", desc = "Recent files" },
+    { "<leader>fc", "<Cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Fuzzy search" },
+    { "<leader>fb", "<Cmd>Telescope buffers<CR>", desc = "List buffers" },
+    { "<leader>fd", "<Cmd>Telescope diagnostics<CR>", desc = "List diagnostics" },
+    { "<leader>fs", U.lsp_symbols("document"), desc = "Goto symbol" },
+    { "<leader>fS", U.lsp_symbols("workspace"), desc = "Goto symbol (Workspace)" },
+    { "<leader>fR", "<Cmd>Telescope resume<CR>", desc = "Resume" },
   },
   opts = function()
     local actions = require("telescope.actions")
