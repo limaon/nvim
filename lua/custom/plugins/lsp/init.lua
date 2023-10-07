@@ -270,8 +270,6 @@ local M = {
           -- go
           nls.builtins.code_actions.gomodifytags,
           nls.builtins.code_actions.impl,
-          nls.builtins.formatting.gofumpt,
-          nls.builtins.formatting.goimports_reviser,
 
           -- markdown
           nls.builtins.formatting.markdownlint,
