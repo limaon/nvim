@@ -31,7 +31,6 @@ o.cursorlineopt = moduleObject.styles.transparent and "number" or "number,line"
 
 -- display
 o.signcolumn = "yes"
--- o.smoothscroll = true
 
 -- o.modifiable = true
 -- o.fileencoding = "utf-8"
@@ -78,7 +77,9 @@ o.cmdheight = 1
 o.wildmenu = true
 o.wildoptions = "pum"
 o.wildignorecase = true
+-- o.wildmode = "list:longest,list:full"
 o.wildmode = "longest:full,full"
+o.wildignore = "*.o,*.obj,*.pyc,*.class,**/node_modules/*,**/.git/*"
 
 -- Match and search
 o.hlsearch = false
@@ -95,8 +96,6 @@ o.updatetime = 500 -- 250
 o.splitright = true
 o.splitbelow = true
 
-o.splitkeep = "screen"
-
 -- Backup and Swap
 o.swapfile = true
 o.directory = settings.swapdir
@@ -108,7 +107,17 @@ o.backup = true
 o.backupdir = moduleObject.settings.backupdir
 
 -- Message output on vim actions
-opt.shortmess:append({ W = true, I = true, c = true, C = true })
+opt.shortmess = {
+  f = true,
+  s = true,
+  o = true,
+  O = true,
+  t = true,
+  T = true,
+  A = true,
+  c = true,
+  F = true,
+}
 
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
