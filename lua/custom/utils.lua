@@ -201,7 +201,7 @@ end
 ---@param client table<string, any> lsp client
 ---@return boolean
 function M.common_on_init(client)
-  local settings = fmt("%s/%s/settings.json", client.workspace_folders[1].name, mo.settings.metadir)
+  local settings = fmt("%s/%s/settings.json", client.workspace_folders[1].name, moduleObject.settings.metadir)
   if vim.fn.filereadable(settings) == 0 then
     return true
   end
@@ -263,7 +263,7 @@ function M.resolve_config(name, ...)
     capabilities = M.common_capabilities(),
   }
 
-  local has_provider, cfg = pcall(require, "mvim.plugins.lsp.providers." .. name)
+  local has_provider, cfg = pcall(require, "custom.plugins.lsp.providers." .. name)
   if has_provider then
     defaults = vim.tbl_deep_extend("force", defaults, cfg) or {}
   end
