@@ -10,11 +10,11 @@ local M = {
         experimental = { ghost_text = true },
         window = {
           completion = {
-            border = mo.styles.border,
+            border = moduleObject.styles.border,
             winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
           },
           documentation = {
-            border = mo.styles.border,
+            border = moduleObject.styles.border,
             winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
           },
         },
@@ -127,7 +127,7 @@ local M = {
   dependencies = {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-cmdline",
+    -- "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-nvim-lsp",
     "saadparwaiz1/cmp_luasnip",
     {

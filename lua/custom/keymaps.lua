@@ -63,8 +63,8 @@ keymap("v", "<", "<gv", { desc = "Visual shifting" })
 keymap({ "i", "n" }, "<esc>", "<Cmd>nohlsearch<CR><Esc>", { desc = "Escape and clear hlsearch" })
 
 -- Better up/down
-keymap({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Move cursor up" })
-keymap({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Move cursor down" })
+keymap({ "n", "v" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Move cursor up" })
+keymap({ "n", "v" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Move cursor down" })
 
 -- Open File browser
 keymap("n", "<leader>e", "<Cmd>Explore<CR>", { desc = "Open Netrw" })

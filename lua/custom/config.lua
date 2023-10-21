@@ -115,7 +115,7 @@ function M.setup()
     M.load("autocmds")
   end
 
-  require("custom.utils").augroup("Mvim", {
+  require("custom.utils").augroup("Custom", {
     pattern = "VeryLazy",
     event = "User",
     command = function()

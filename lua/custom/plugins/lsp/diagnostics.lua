@@ -22,7 +22,7 @@ function M.setup()
     float = {
       header = "",
       source = false,
-      border = mo.styles.border,
+      border = moduleObject.styles.border,
       prefix = function(d)
         local level = vim.diagnostic.severity[d.severity]
         local prefix = fmt("%s ", I.diagnostics[level:lower()])
@@ -39,7 +39,7 @@ function M.setup()
     },
   })
 
-  require("mvim.utils").augroup("LspDiagnostics", {
+  require("custom.utils").augroup("LspDiagnostics", {
     event = "CursorHold",
     desc = "LSP: show diagnostics",
     command = function()

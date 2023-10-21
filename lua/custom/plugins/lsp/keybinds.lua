@@ -1,92 +1,92 @@
 local M = {}
 
-local providers = require("custom.utils").lsp_providers
+local providers = require("mvim.utils").lsp_providers
 
 M._keys = nil
 
 function M.get()
-  M._keys = M._keys
-      or {
-        {
-          "gd",
-          "<CMD>Telescope lsp_definitions<CR>",
-          desc = "Goto Definition",
-          depends = providers.DEFINITION,
-        },
-        {
-          "gD",
-          vim.lsp.buf.declaration,
-          desc = "Goto Declaration",
-          depends = providers.DECLARATION,
-        },
-        {
-          "gr",
-          "<CMD>Telescope lsp_references<CR>",
-          desc = "References",
-          depends = providers.REFERENCES,
-        },
-        {
-          "gi",
-          "<CMD>Telescope lsp_implementations<CR>",
-          desc = "Goto Implementation",
-          depends = providers.IMPLEMENTATION,
-        },
-        {
-          "gt",
-          "<CMD>Telescope lsp_type_definitions<CR>",
-          desc = "Goto Type Definition",
-          depends = providers.DEFINITION,
-        },
-        {
-          "K",
-          vim.lsp.buf.hover,
-          desc = "Hover",
-          depends = providers.HOVER,
-        },
-        {
-          "gK",
-          vim.lsp.buf.signature_help,
-          desc = "Signature Help",
-          depends = providers.SIGNATUREHELP,
-        },
-        {
-          "<C-k>",
-          vim.lsp.buf.signature_help,
-          mode = "i",
-          desc = "Signature Help",
-          depends = providers.SIGNATUREHELP,
-        },
-        {
-          "<leader>cf",
-          vim.lsp.buf.format,
-          desc = "Format Document",
-          depends = providers.FORMATTING,
-        },
-        {
-          "<leader>cf",
-          vim.lsp.buf.format,
-          desc = "Format Range",
-          mode = "v",
-          depends = providers.RANGEFORMATTING,
-        },
-        {
-          "<leader>cr",
-          vim.lsp.buf.rename,
-          expr = true,
-          desc = "Rename",
-          depends = providers.RENAME,
-        },
-        {
-          "<leader>ca",
-          vim.lsp.buf.code_action,
-          desc = "Code Action",
-          mode = { "n", "v" },
-          depends = providers.CODEACTION,
-        },
+  if not M._keys then
+    M._keys = {
+      {
+        "gd",
+        "<CMD>Telescope lsp_definitions<CR>",
+        desc = "Goto Definition",
+        depends = providers.DEFINITION,
+      },
+      {
+        "gD",
+        vim.lsp.buf.declaration,
+        desc = "Goto Declaration",
+        depends = providers.DECLARATION,
+      },
+      {
+        "gr",
+        "<CMD>Telescope lsp_references<CR>",
+        desc = "References",
+        depends = providers.REFERENCES,
+      },
+      {
+        "gi",
+        "<CMD>Telescope lsp_implementations<CR>",
+        desc = "Goto Implementation",
+        depends = providers.IMPLEMENTATION,
+      },
+      {
+        "gt",
+        "<CMD>Telescope lsp_type_definitions<CR>",
+        desc = "Goto Type Definition",
+        depends = providers.DEFINITION,
+      },
+      {
+        "K",
+        vim.lsp.buf.hover,
+        desc = "Hover",
+        depends = providers.HOVER,
+      },
+      {
+        "gK",
+        vim.lsp.buf.signature_help,
+        desc = "Signature Help",
+        depends = providers.SIGNATUREHELP,
+      },
+      {
+        "<C-k>",
+        vim.lsp.buf.signature_help,
+        mode = "i",
+        desc = "Signature Help",
+        depends = providers.SIGNATUREHELP,
+      },
+      {
+        "<leader>cf",
+        vim.lsp.buf.format,
+        desc = "Format Document",
+        depends = providers.FORMATTING,
+      },
+      {
+        "<leader>cf",
+        vim.lsp.buf.format,
+        desc = "Format Range",
+        mode = "v",
+        depends = providers.RANGEFORMATTING,
+      },
+      {
+        "<leader>cr",
+        vim.lsp.buf.rename,
+        desc = "Rename",
+        depends = providers.RENAME,
+      },
+      {
+        "<leader>ca",
+        vim.lsp.buf.code_action,
+        desc = "Code Action",
+        mode = { "n", "v" },
+        depends = providers.CODEACTION,
+      },
 
-        { "[d", vim.diagnostic.goto_prev, desc = "Prev Diagnostic" },
-        { "]d", vim.diagnostic.goto_next, desc = "Next Diagnostic" },
-      }
+      { "[d", vim.diagnostic.goto_prev, desc = "Prev Diagnostic" },
+      { "]d", vim.diagnostic.goto_next, desc = "Next Diagnostic" },
+    }
+  end
   return M._keys
 end
 
