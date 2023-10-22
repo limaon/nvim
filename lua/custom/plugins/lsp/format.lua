@@ -3,7 +3,7 @@ local M = {}
 local U = require("custom.utils")
 
 M.opts = {
-  autoformat = true,
+  autoformat = false,
 }
 
 function M.enabled()

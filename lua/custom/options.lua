@@ -18,44 +18,31 @@ o.breakindent = true
 -- Line
 o.number = true
 o.relativenumber = true
--- o.numberwidth = 2
+o.numberwidth = 2
 
 o.cursorline = true
 o.cursorlineopt = moduleObject.styles.transparent and "number" or "number,line"
 
 -- fold
--- o.foldlevel = 99
--- o.foldcolumn = "auto"
+o.foldlevel = 99
+o.foldcolumn = "auto"
 -- o.foldmethod = "expr"
 -- o.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- display
 o.signcolumn = "yes"
-
--- o.modifiable = true
--- o.fileencoding = "utf-8"
-
 opt.clipboard = "unnamedplus"
-
+o.smothscroll = false
 o.termguicolors = true
-
 o.laststatus = 2
-
 o.scrolloff = 10
 o.sidescrolloff = 5
-
 o.pumheight = 12
-
 o.completeopt = "menu,menuone,noselect"
-
 o.confirm = true
-
 o.history = 10
-
 o.autochdir = true
-
 o.colorcolumn = "80"
-
 o.statusline = "%<%f %h%m%r %=  %y |" .. vim.o.encoding .. "| L:%l C:%c P:%P "
 
 -- o.guicursor = ''
@@ -77,7 +64,6 @@ o.cmdheight = 1
 o.wildmenu = true
 o.wildoptions = "pum"
 o.wildignorecase = true
--- o.wildmode = "list:longest,list:full"
 o.wildmode = "longest:full,full"
 o.wildignore = "*.o,*.obj,*.pyc,*.class,**/node_modules/*,**/.git/*"
 
@@ -87,6 +73,7 @@ o.incsearch = true
 o.smartcase = true
 o.ignorecase = true
 o.inccommand = 'split'
+o.splitkeep = 'screen'
 
 -- Timings
 o.timeoutlen = 500 -- 300
@@ -117,6 +104,9 @@ opt.shortmess = {
   A = true,
   c = true,
   F = true,
+  W = true,
+  I = true,
+  C = true
 }
 
 -- fix markdown indentation settings

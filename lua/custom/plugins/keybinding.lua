@@ -1,4 +1,5 @@
 local M = {
+  --[[
   "folke/which-key.nvim",
   event = "VeryLazy",
   opts = {
@@ -47,6 +48,7 @@ local M = {
       },
     })
   end,
+  --]]
 }
 
 return M

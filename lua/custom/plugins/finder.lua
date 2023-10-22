@@ -10,6 +10,7 @@ local M = {
     { "<leader>fc", "<Cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Fuzzy search" },
     { "<leader>fb", "<Cmd>Telescope buffers<CR>", desc = "List buffers" },
     { "<leader>fd", "<Cmd>Telescope diagnostics<CR>", desc = "List diagnostics" },
+    { "<leader>fk", "<Cmd>Telescope keymaps<CR>", desc = "List keymaps" },
     { "<leader>fs", U.lsp_symbols("document"), desc = "Goto symbol" },
     { "<leader>fS", U.lsp_symbols("workspace"), desc = "Goto symbol (Workspace)" },
     { "<leader>fR", "<Cmd>Telescope resume<CR>", desc = "Resume" },
@@ -72,8 +73,9 @@ local M = {
       },
       pickers = {
         find_files = {
-          find_command = { "fd" },
+          -- find_command = { "fd" },
           hidden = true,
+          previewer = false,
         },
         buffers = {
           theme = "dropdown",

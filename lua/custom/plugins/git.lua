@@ -5,7 +5,6 @@ local M = {
       { "<leader>gs", "<Cmd>Git<CR>", desc = "Git status" },
     },
   },
-
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },

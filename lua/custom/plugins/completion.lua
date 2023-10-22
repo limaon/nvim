@@ -42,7 +42,7 @@ local M = {
         formatting = {
           fields = { "kind", "abbr", "menu" },
           format = function(entry, item)
-            item.kind = string.format("%s %s", I.lsp.kinds[item.kind:lower()], item.kind)
+            item.kind = string.format("%s ", I.lsp.kinds[item.kind:lower()])
             item.menu = ({
               luasnip = "[Snip]",
               nvim_lsp = "[LSP]",
@@ -51,6 +51,7 @@ local M = {
               cmdline = "[Cmd]",
               codeium = "[AI]",
             })[entry.source.name] or entry.source.name
+            item.abbr = string.sub(item.abbr, 1, 20)
             return item
           end,
         },
@@ -73,7 +74,7 @@ local M = {
               fallback()
             end
           end, { "i", "s", "c" }),
-          ["<C-y>"] = cmp.mapping(cmp.mapping.confirm({ select = false }), { "i", "c" }),
+          ["<C-y>"] = cmp.mapping(cmp.mapping.confirm({ select = true }), { "i", "c" }),
           ["<C-e>"] = { i = cmp.mapping.abort(), c = cmp.mapping.close() },
           ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-8), { "i", "c" }),
           ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(8), { "i", "c" }),
@@ -85,7 +86,7 @@ local M = {
           ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = select }), { "i", "c" }),
         },
       },
-      cmdline = {
+      --[[ cmdline = {
         {
           { "/", "?" },
           {
@@ -106,7 +107,7 @@ local M = {
             }),
           },
         },
-      },
+      }, ]]
       -- filetype = {},
       -- buffer = {}
     }
@@ -127,7 +128,6 @@ local M = {
   dependencies = {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-buffer",
-    -- "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-nvim-lsp",
     "saadparwaiz1/cmp_luasnip",
     {

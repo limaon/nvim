@@ -1,7 +1,6 @@
 # ✨ My Neovim dotfiles 🎉
 
 ## ⚙️ Install
----
 
 ### 🐳 Try it with docker
 
@@ -39,7 +38,6 @@ docker run --rm \
 ### 🔗 Dependencies
 
 * [ ] ripgrep
-* [ ] fd
 * [ ] fzf
 * [ ] lazygit
 

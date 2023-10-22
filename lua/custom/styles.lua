@@ -66,7 +66,7 @@ moduleObject.styles = {
       test = "",
     },
     indent = {
-      dash = "┊",
+      dash = "",
       solid = "│",
       last = "└",
     },
