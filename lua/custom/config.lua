@@ -58,7 +58,6 @@ function M.bootstrap()
           "gzip",
           "matchit",
           "matchparen",
-          "netrwPlugin",
           "tarPlugin",
           "tohtml",
           "tutor",
