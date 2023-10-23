@@ -3,6 +3,9 @@ local M = {
     "tpope/vim-fugitive",
     keys = {
       { "<leader>gs", "<Cmd>Git<CR>", desc = "Git status" },
+      { "<leader>gw", "<Cmd>Gwrite<CR>", desc = "Git add" },
+      { "<leader>gl", "<Cmd>Git log<CR>", desc = "Git log" },
+      { "<leader>gp", "<Cmd>Git push -u origin<CR>", desc = "Git push" },
     },
   },
   {
@@ -32,7 +35,7 @@ local M = {
         keymap("n", "[g", gs.prev_hunk, "Prev git hunk")
         keymap("n", "]g", gs.next_hunk, "Next git hunk")
         -- Actions
-        keymap("n", "<leader>gp", gs.preview_hunk, "Preview hunk")
+        keymap("n", "<leader>gh", gs.preview_hunk, "Preview hunk")
         -- Text object
         keymap({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>", "Select git hunk")
       end,

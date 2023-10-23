@@ -43,7 +43,7 @@ o.confirm = true
 o.history = 10
 o.autochdir = true
 o.colorcolumn = "80"
-o.statusline = "%<%f %h%m%r %=  %y |" .. vim.o.encoding .. "| L:%l C:%c P:%P "
+o.statusline = "%<%f %h%m%r %= %{get(b:,'gitsigns_status','')} %y |" .. vim.o.encoding .. "| L:%l C:%c P:%P "
 
 -- o.guicursor = ''
 
