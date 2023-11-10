@@ -160,7 +160,7 @@ local M = {
       {
         "<leader>p",
         function()
-          require("telescope").extensions.yank_history.yank_history({})
+          require("telescope").extensions.yank_history.yank_history(require('telescope.themes').get_dropdown({ previewer = false }))
         end,
         desc = "Open Yank History",
       },
@@ -187,8 +187,16 @@ local M = {
       { "kkharji/sqlite.lua" },
     },
     opts = {
-      highlight = { timer = 250 },
-      ring = { storage = "sqlite" },
+      highlight = { timer = 150 },
+      ring = {
+        history_length = 10,
+        storage = "sqlite",
+      },
+      picker = {
+        telescope = {
+          use_default_mappings = false,
+        },
+      },
     },
   },
 
