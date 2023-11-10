@@ -8,7 +8,6 @@ local function keymap(mode, lhs, rhs, opts)
   end
 end
 
-
 -- Select all
 keymap('n', '<M-a>', 'gg<S-v>G', { desc = "Select all" })
 
