@@ -21,7 +21,6 @@ local M = {
         -- untracked = { text = "▏" },
       },
       current_line_blame = false,
-      current_line_blame_opts = { virt_text_priority = 100 },
       current_line_blame_formatter = " <author>, <author_time> · <summary> ",
       preview_config = { border = moduleObject.styles.border },
       on_attach = function(bufnr)
@@ -35,7 +34,10 @@ local M = {
         keymap("n", "[g", gs.prev_hunk, "Prev git hunk")
         keymap("n", "]g", gs.next_hunk, "Next git hunk")
         -- Actions
-        keymap("n", "<leader>gh", gs.preview_hunk, "Preview hunk")
+        keymap("n", "<leader>hS", gs.stage_buffer, "Stage buffer")
+        keymap("n", "<leader>ha", gs.stage_hunk, "Stage hunk")
+        keymap("n", "<leader>hp", gs.preview_hunk, "Preview hunk")
+        keymap("n", "<leader>hb", function() gs.blame_line{full=true} end, "Blame hunk")
         -- Text object
         keymap({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>", "Select git hunk")
       end,
