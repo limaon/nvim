@@ -24,9 +24,10 @@ o.cursorline = true
 o.cursorlineopt = moduleObject.styles.transparent and "number" or "number,line"
 
 -- fold
-o.foldlevel = 99
+o.foldlevel = 0
+opt.modelines = 1
 o.foldcolumn = "auto"
--- o.foldmethod = "expr"
+o.foldmethod = "marker"
 -- o.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- display
@@ -48,7 +49,7 @@ o.statusline = "%<%f %h%m%r %= %{get(b:,'gitsigns_status','')} %y |" .. vim.o.en
 -- o.guicursor = ''
 
 opt.fillchars = {
-  eob = " ",
+  eob = "~",
   fold = " ",
   msgsep = " ",
   foldsep = " ",
