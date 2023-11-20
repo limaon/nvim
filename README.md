@@ -1,8 +1,8 @@
-# ✨ My Neovim dotfiles 🎉
+# My Neovim dotfiles
 
-## ⚙️ Install
+## Install
 
-### 🐳 Try it with docker
+### Try it with docker
 
 ```bash
 docker run -w /root -it --rm alpine:edge sh -uelic '
@@ -14,7 +14,7 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
 '
 ```
 
-### 🪡 Prepare
+### Prepare
 
 * [Wallpaper](https://wallhaven.cc/w/zyxvqy)
 
@@ -35,13 +35,13 @@ docker run --rm \
     --progressbars
 ```
 
-### 🔗 Dependencies
+### Dependencies
 
 * [ ] ripgrep
 * [ ] fzf
 * [ ] lazygit
 
-### ⌨️  Keymaps
+### Keymaps
 
 #### General
 
@@ -122,7 +122,7 @@ docker run --rm \
 | &lt;leader&gt;fs | List symbols         | **n**          |
 | &lt;leader&gt;ft | List todos           | **n**          |
 
-### Gitsings
+### Gitsigns
 
 | Key              | Description    | Mode           |
 | --------------   | -------------- | -------------- |

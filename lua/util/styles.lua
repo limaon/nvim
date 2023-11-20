@@ -86,6 +86,7 @@ moduleObject.styles = {
       right_half_circle_thick = "",
     },
     misc = {
+      flash = "󰉂",
       code = "",
       repo = "",
       buffer = "",

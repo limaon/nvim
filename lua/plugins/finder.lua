@@ -1,20 +1,24 @@
-local U = require("custom.utils")
+local U = require("util")
 
 local M = {
   "nvim-telescope/telescope.nvim",
   cmd = "Telescope",
   keys = {
     { "<leader>ff", "<Cmd>Telescope find_files<CR>", desc = "Find files" },
-    { "<leader>fw", "<Cmd>Telescope grep_string<CR>", desc = "Find word" },
+    { "<leader>fg", "<Cmd>Telescope live_grep theme=dropdown<CR>", desc = "Grep (root dir)" },
+    { "<leader>fw", "<Cmd>Telescope grep_string theme=dropdown<CR>", desc = "Find word" },
     { "<leader>fr", "<Cmd>Telescope oldfiles<CR>", desc = "Recent files" },
     { "<leader>fc", "<Cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Fuzzy search" },
-    { "<leader>fb", "<Cmd>Telescope buffers<CR>", desc = "List buffers" },
+    {
+      "<leader>fb",
+      "<Cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>",
+      desc = "List buffers",
+    },
     { "<leader>fd", "<Cmd>Telescope diagnostics<CR>", desc = "List diagnostics" },
-    { "<leader>fk", "<Cmd>Telescope keymaps<CR>", desc = "List keymaps" },
-    { "<leader>gb", "<Cmd>Telescope git_branches<CR>", desc = "List branches for git" },
-    { "<leader>fs", U.lsp_symbols("document"), desc = "Goto symbol" },
-    { "<leader>fS", U.lsp_symbols("workspace"), desc = "Goto symbol (Workspace)" },
-    { "<leader>fR", "<Cmd>Telescope resume<CR>", desc = "Resume" },
+    { "<leader>fs", U.finder.lsp_symbols("document"), desc = "Goto symbol" },
+    { "<leader>fS", U.finder.lsp_symbols("workspace"), desc = "Goto symbol (Workspace)" },
+    { "<leader>fn", U.finder.config_files(), desc = "Neovim config files" },
+    { "<leader>f;", "<Cmd>Telescope resume<CR>", desc = "Resume" },
   },
   opts = function()
     local actions = require("telescope.actions")
@@ -43,8 +47,12 @@ local M = {
           "pnpm-lock.yaml",
         },
         layout_config = {
-          height = 0.9,
-          width = 0.9,
+          width = function(_, max_columns, _)
+            return math.min(max_columns, 80)
+          end,
+          height = function(_, _, max_lines)
+            return math.min(max_lines, 30)
+          end,
           horizontal = {
             preview_cutoff = 120,
             preview_width = 0.6,
@@ -100,6 +108,7 @@ local M = {
     }
   end,
   dependencies = {
+
     {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
@@ -109,34 +118,8 @@ local M = {
         end)
       end,
     },
-    {
-      "nvim-telescope/telescope-live-grep-args.nvim",
-      keys = {
-        {
-          "<leader>fg",
-          "<Cmd>Telescope live_grep_args theme=dropdown<CR>",
-          desc = "Find in files (Grep)"
-        },
-      },
-      config = function()
-        require("telescope").load_extension("live_grep_args")
-      end,
-    },
-    {
-      "ahmedkhalf/project.nvim",
-      keys = {
-        { "<leader>fp", "<Cmd>Telescope projects theme=dropdown<CR>", desc = "Recent projects" },
-      },
-      opts = {
-        manual_mode = false,
-        patterns = { ".git", "pyproject.toml", "go.mod", "Makefile" },
-        show_hidden = true,
-      },
-      config = function(_, opts)
-        require("project_nvim").setup(opts)
-        require("telescope").load_extension("projects")
-      end,
-    },
+
+
   },
 }
 

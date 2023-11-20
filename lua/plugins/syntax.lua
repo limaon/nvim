@@ -9,6 +9,10 @@ local M = {
       { "<BS>", mode = { "n", "v" }, desc = "Schrink selection" },
       { "<CR>", mode = { "n", "v" }, desc = "Increment selection" },
     },
+    init = function(plugin)
+      require("lazy.core.loader").add_to_rtp(plugin)
+      require("nvim-treesitter.query_predicates")
+    end,
     dependencies = {
       { "nvim-treesitter/nvim-treesitter-textobjects" },
       {
@@ -18,15 +22,31 @@ local M = {
     },
     opts = {
       ensure_installed = {
-        "bash", "css", "dockerfile",
-        "gitignore", "html", "javascript",
-        "json", "lua", "markdown",
-        "python", "scss", "toml",
-        "tsx", "typescript", "vim",
-        "vue", "yaml",
+        "bash",
+        "css",
+        "dockerfile",
+        -- "dot",
+        "gitignore",
+        -- "go",
+        -- "gomod",
+        -- "gowork",
+        -- "gosum",
+        -- "html",
+        "javascript",
+        "json",
+        "lua",
+        "markdown",
+        "python",
+        -- "scss",
+        -- "toml",
+        -- "tsx",
+        -- "typescript",
+        "vim",
+        -- "vue",
+        -- "yaml",
       },
       highlight = { enable = true },
-      -- indent = { enable = true },
+      indent = { enable = true },
       incremental_selection = {
         enable = true,
         keymaps = {
@@ -36,7 +56,7 @@ local M = {
           node_decremental = "<BS>", -- visual mode
         },
       },
-      context_commentstring = { enable = true, enable_autocmd = false },
+      -- context_commentstring = { enable = true, enable_autocmd = false },
       textobjects = {
         select = {
           enable = true,
@@ -67,20 +87,6 @@ local M = {
     end,
   },
 
-  -- surround
-  --[[
-  {
-    "kylechui/nvim-surround",
-    keys = {
-      { "ys", desc = "Add surround" },
-      { "ds", desc = "Delete surround" },
-      { "cs", desc = "Replace surround" },
-    },
-    opts = {
-      move_cursor = false,
-    },
-  },
-  --]]
 }
 
 return M

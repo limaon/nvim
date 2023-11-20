@@ -1,4 +1,4 @@
-require("custom.styles")
+require("util.styles")
 
 local M = {}
 
@@ -22,11 +22,11 @@ function M.bootstrap()
   vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
   require("lazy").setup({
-    spec = "custom.plugins",
-    defaults = { lazy = true },
-    install = { colorscheme = { "catppuccin" } },
+    spec = "plugins",
+    defaults = { lazy = false },
+    install = { colorscheme = { "solarized-osaka" } },
     change_detection = { notify = false },
-    checker = { enabled = true, notify = false },
+    checker = { enabled = true, notify = true },
     ui = {
       border = moduleObject.styles.border,
       icons = {
@@ -56,8 +56,6 @@ function M.bootstrap()
       rtp = {
         disabled_plugins = {
           "gzip",
-          "matchit",
-          "matchparen",
           "tarPlugin",
           "tohtml",
           "tutor",
@@ -70,9 +68,10 @@ end
 
 ---@param name "autocmds" | "options" | "keymaps"
 function M.load(name)
-  local Util = require("lazy.core.util")
   local function _load(mod)
-    Util.try(function()
+    local U = require("lazy.core.util")
+
+    U.try(function()
       require(mod)
     end, {
       msg = "Failed loading " .. mod,
@@ -81,12 +80,12 @@ function M.load(name)
         if info == nil or (type(info) == "table" and #info == 0) then
           return
         end
-        Util.error(msg)
+        U.error(msg)
       end,
     })
   end
 
-  _load("custom." .. name)
+  _load("config." .. name)
 
   if vim.bo.filetype == "lazy" then
     vim.cmd([[do VimResized]])
@@ -98,8 +97,7 @@ function M.init()
   if not M.did_init then
     M.did_init = true
 
-    -- M.load("options")
-    require("custom.config").load("options")
+    M.load("options")
   end
 end
 
@@ -114,7 +112,7 @@ function M.setup()
     M.load("autocmds")
   end
 
-  require("custom.utils").augroup("Custom", {
+  require("util").augroup("Custom", {
     pattern = "VeryLazy",
     event = "User",
     command = function()
@@ -122,6 +120,8 @@ function M.setup()
         M.load("autocmds")
       end
       M.load("keymaps")
+
+      require("util").format.setup()
     end,
   })
 end

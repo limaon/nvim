@@ -39,7 +39,7 @@ function M.setup()
     },
   })
 
-  require("custom.utils").augroup("LspDiagnostics", {
+  require("util").augroup("LspDiagnostics", {
     event = "CursorHold",
     desc = "LSP: show diagnostics",
     command = function()

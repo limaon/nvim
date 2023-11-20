@@ -66,23 +66,6 @@ local M = {
     },
   },
 
-  --[[
-  {
-    "andymass/vim-matchup",
-    event = "BufReadPost",
-    keys = {
-      { "[%", desc = "Prev match item" },
-      { "]%", desc = "Next match item" },
-      { "<leader>;", "<plug>(matchup-%)", desc = "Find a match" },
-    },
-    config = function()
-      vim.g.matchup_matchparen_offscreen = {
-        method = "popup",
-        fullwidth = 1,
-        syntax_hl = 1,
-      }
-    end,
-  },--]]
 }
 
 return M
