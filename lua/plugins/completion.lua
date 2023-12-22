@@ -33,7 +33,6 @@ local M = {
           end,
         },
         sources = {
-          { name = "codeium", group_index = 1 },
           { name = "nvim_lsp", group_index = 1 },
           { name = "luasnip", group_index = 1 },
           { name = "path", group_index = 1 },
@@ -122,9 +121,9 @@ local M = {
   dependencies = {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-buffer",
-    -- "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-nvim-lsp",
     "saadparwaiz1/cmp_luasnip",
+    -- "hrsh7th/cmp-cmdline",
     {
       "L3MON4D3/LuaSnip",
       build = "make install_jsregexp",
@@ -163,13 +162,6 @@ local M = {
           paths = vim.fn.stdpath("config") .. "/snippets",
         })
       end,
-    },
-
-    {
-      "Exafunction/codeium.nvim",
-      cmd = "Codeium",
-      build = ":Codeium Auth",
-      opts = {},
     },
   },
 }

@@ -10,7 +10,7 @@ local M = {
       underlined = false,
     },
 
-    sidebars = { "qf", "vista_kind", "terminal", "packer" },
+    sidebars = { "qf", "vista_kind", "packer" },
 
     on_highlights = function(hl, c)
       hl.MatchParen = { fg = c.none, bg = c.none, bold = true }

@@ -4,9 +4,20 @@ local settings = moduleObject.settings
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
 vim.g.autoformat = false
-o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
+-- fix markdown indentation settings
+vim.g.markdown_recommended_style = 0
+
+-- Options for Netrw native file browser
+vim.g.netrw_fastbrowse = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_hide = 1
+vim.g.netrw_list_hide = '.git,*.bak,*.swp,*.~,*.tmp,*.temp,node_modules,__pycache__'
+vim.g.netrw_liststyle = 0
+vim.g.netrw_winsize = 20
+vim.g.netrw_localmovecmd = 'mv -f'
+vim.g.netrw_localrmdir = 'rm -r'
 
 -- Add asterisks in block comments
 opt.formatoptions:append({ "r" })
@@ -55,7 +66,7 @@ o.showmode = true
 
 o.laststatus = 2
 o.statusline = "%<%f %h%m%r %= %{get(b:,'gitsigns_status','')} %y |" ..
-vim.o.encoding .. "| L:%l C:%c P:%P "
+o.encoding .. "| L:%l C:%c P:%P "
 
 o.scrolloff = 10
 o.sidescrolloff = 5
@@ -82,7 +93,7 @@ opt.wildignore:append({ "*.o,*.obj,*.pyc,*.class,**/node_modules/*,**/.git/*" })
 o.incsearch = true
 o.smartcase = true
 o.ignorecase = true
-o.hlsearch = false
+o.hlsearch = true
 
 -- Timings
 o.timeoutlen = 500
@@ -105,33 +116,9 @@ o.backup = true
 o.backupdir = moduleObject.settings.backupdir
 
 -- Message output on vim actions
-opt.shortmess:append({
-  W = true,
-  I = true,
-  c = true,
-  C = true,
-  f = true,
-  o = true,
-  O = true,
-  t = true,
-  T = true,
-  A = true,
-})
+opt.shortmess:append({ W = true, c = true, C = true, t = true, T = true })
 
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.backspace = { "start", "eol", "indent" }
 opt.path:append({ "**" })
-
--- fix markdown indentation settings
-vim.g.markdown_recommended_style = 0
-
--- Options for Netrw native file browser
-vim.g.netrw_fastbrowse = 0
-vim.g.netrw_banner = 0
-vim.g.netrw_hide = 1
-vim.g.netrw_list_hide = '.git,*.bak,*.swp,*.~,*.tmp,*.temp,node_modules,__pycache__'
-vim.g.netrw_liststyle = 0
-vim.g.netrw_winsize = 20
-vim.g.netrw_localmovecmd = 'mv -f'
-vim.g.netrw_localrmdir = 'rm -r'

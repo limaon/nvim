@@ -5,6 +5,12 @@ local M = {
       { "gc", mode = { "n", "v" }, desc = "Linewise comment" },
       { "gb", mode = { "n", "v" }, desc = "Blockwise comment" },
     },
+    dependencies = {
+      {
+        "JoosepAlviste/nvim-ts-context-commentstring",
+        opts = { enable_autocmd = false },
+      },
+    },
     opts = function()
       local ok, tcs = pcall(require, "ts_context_commentstring.integrations.comment_nvim")
       return {
@@ -39,8 +45,8 @@ local M = {
 
         -- Typing = when () -> () => |
         Rule("%(.*%)%s*%=$", "> {}", { "typescript", "typescriptreact", "javascript", "vue" })
-            :use_regex(true)
-            :set_end_pair_length(1),
+          :use_regex(true)
+          :set_end_pair_length(1),
       })
     end,
   },
@@ -65,7 +71,6 @@ local M = {
       },
     },
   },
-
 }
 
 return M

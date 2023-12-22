@@ -26,7 +26,7 @@ function M.bootstrap()
     defaults = { lazy = false },
     install = { colorscheme = { "solarized-osaka" } },
     change_detection = { notify = false },
-    checker = { enabled = true, notify = true },
+    checker = { enabled = true, notify = false },
     ui = {
       border = moduleObject.styles.border,
       icons = {
