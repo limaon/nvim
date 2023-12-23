@@ -18,7 +18,6 @@ local M = {
     },
     opts = {
       ensure_installed = {
-        "bash",
         "css",
         "json",
         "lua",
@@ -27,6 +26,7 @@ local M = {
         "dockerfile",
         "gitignore",
         "javascript",
+        -- "bash",
         -- "vim",
         -- "dot",
         -- "go",

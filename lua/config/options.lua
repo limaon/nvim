@@ -65,7 +65,7 @@ o.showcmd = true
 o.showmode = true
 
 o.laststatus = 2
-o.statusline = "%<%f %h%m%r %= %{get(b:,'gitsigns_status','')} %y |" ..
+o.statusline = "%<%{expand('%:t')}  %h%m%r %= %{get(b:,'gitsigns_status','')} %y |" ..
 o.encoding .. "| L:%l C:%c P:%P "
 
 o.scrolloff = 10

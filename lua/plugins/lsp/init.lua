@@ -46,7 +46,7 @@ local M = {
     },
     opts = {
       servers = {
-        bashls = {},
+        -- bashls = {},
         dockerls = {},
         rust_analyzer = {
           keys = {
