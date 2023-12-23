@@ -9,7 +9,7 @@ return {
           name = "conform.nvim",
           format = function(buf)
             local ft = vim.bo[buf].filetype
-            local opts = require("mvim.util").opts("conform.nvim")
+            local opts = require("util").opts("conform.nvim")
             local extra_args = opts.extra_lang_opts[ft] or {}
             require("conform").format(vim.tbl_deep_extend("force", { bufnr = buf }, extra_args))
           end,

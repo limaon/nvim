@@ -48,19 +48,16 @@ local M = {
           },
         },
         formatting = {
-          fields = { "abbr", "kind" },
-          format = function(_, item)
-            if item.kind and I.lsp.kinds[item.kind:lower()] then
-              item.kind = string.format("%s %s", I.lsp.kinds[item.kind:lower()], item.kind)
-            end
-            if item.abbr then
-              if string.len(item.abbr) > 20 then
-                item.abbr = string.sub(item.abbr, 1, 17) .. "... "
-              end
-            else
-              item.abbr = ""
-            end
-
+          fields = { "abbr", "kind", "menu" },
+          format = function(entry, item)
+            item.kind = string.format("%s %s", I.lsp.kinds[item.kind:lower()], item.kind)
+            item.menu = ({
+              luasnip = "[Snip]",
+              nvim_lsp = "[LSP]",
+              buffer = "[Buf]",
+              path = "[Path]",
+              cmdline = "[Cmd]",
+            })[entry.source.name] or entry.source.name
             return item
           end,
         },
